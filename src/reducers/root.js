@@ -1,10 +1,11 @@
 import cards from "./cards";
+import species from "./species";
 // import titles from "./titles";
 import { combineReducers } from "redux";
 
 export default combineReducers({
-	cards
-	// titles
+	cards,
+	species
 });
 
 /** PokeApp State:

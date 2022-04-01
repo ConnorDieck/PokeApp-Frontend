@@ -14,7 +14,6 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="App">
-				<header className="App-header" />
 				<Navigator />
 			</div>
 		</ThemeProvider>

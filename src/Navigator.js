@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { fetchSpeciesFromAPI } from "./actions/species";
 
 import PokeappApi from "./api";
 import jwt from "jsonwebtoken";
@@ -8,8 +9,13 @@ import jwt from "jsonwebtoken";
 
 import NavBar from "./NavBar";
 import Home from "./Home";
+import LoginForm from "./auth/LoginForm";
+import SignupForm from "./auth/SignupForm";
+import EditFavoriteForm from "./user/EditFavoriteForm";
+import NotFound from "./NotFound";
 
 import useLocalStorage from "./hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
 
 function Navigator() {
 	// TODO: update all references to currentUser in local state to redux store with dispatch
@@ -17,6 +23,7 @@ function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
 	// Look in local storage for token
 	const [ token, setToken ] = useLocalStorage("token", "");
+	const dispatch = useDispatch();
 
 	console.debug("isLoading=", isLoading, "currentUser=", currentUser, "token=", token);
 
@@ -57,6 +64,28 @@ function Navigator() {
 		setToken(null);
 	}
 
+	// When app loads, pull species data from db
+	useEffect(
+		function loadSpecies() {
+			console.debug("Navigator useEffect loadSpecies");
+
+			async function getSpeciesInfo() {
+				try {
+					dispatch(fetchSpeciesFromAPI());
+				} catch (err) {
+					console.error("Navigator getUserInfo: Problem loading", err);
+					setCurrentUser(null);
+				}
+
+				setIsLoading(false);
+			}
+
+			setIsLoading(true);
+			getSpeciesInfo();
+		},
+		[ dispatch ]
+	);
+
 	// When token changes, get info on user or set to null (if logged out)
 	useEffect(
 		function loadUserInfo() {
@@ -86,7 +115,7 @@ function Navigator() {
 	);
 
 	if (isLoading) {
-		return <p>Loading &hellip;</p>;
+		return <p>Loading...</p>;
 	}
 
 	return (
@@ -97,7 +126,7 @@ function Navigator() {
 					path="/"
 					element={<Home />}
 				/>
-				{/* <Route //
+				<Route //
 					path="/login"
 					element={<LoginForm login={login} />}
 				/>
@@ -105,11 +134,15 @@ function Navigator() {
 					path="/signup"
 					element={<SignupForm register={register} />}
 				/>
-				<Route //
-					path="/profile"
+				{/* <Route //
+					path="/favorite"
 					element={currentUser ? <EditFavoriteForm editFavorite={editUserFavorite} /> : <NotFound />}
+				/> */}
+				<Route //
+					path="/favorite"
+					element={<EditFavoriteForm editFavorite={editUserFavorite} />}
 				/>
-				<Route path="*" element={<NotFound />} /> */}
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	);
