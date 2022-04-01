@@ -1,9 +1,10 @@
 import cards from "./cards";
 import species from "./species";
-// import titles from "./titles";
+import user from "./user";
 import { combineReducers } from "redux";
 
 export default combineReducers({
+	user,
 	cards,
 	species
 });

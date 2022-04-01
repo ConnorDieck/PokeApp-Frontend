@@ -30,7 +30,7 @@ function NavBar({ logout }) {
 	const classes = useStyles();
 	let Navs = {};
 
-	if (currentUser) {
+	if (currentUser.username) {
 		Navs = (
 			<AppBar position="static">
 				<CssBaseline />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, FormControl, Select, SelectChangeEvent, Button, Paper, Avatar, MenuItem } from "@mui/material";
+import { Grid, FormControl, Select, Button, Paper, Avatar, MenuItem } from "@mui/material";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { useSelector } from "react-redux";
 

@@ -42,7 +42,7 @@ class PokeappApi {
 		return res.species;
 	}
 
-	/** Cards */
+	/** Cards ***********************************************/
 
 	/** Get details on available cards. */
 
@@ -144,8 +144,8 @@ class PokeappApi {
 		return res.token;
 	}
 
-	// Gets current user
-	static async getCurrentUser(username) {
+	// Gets info on user of given username
+	static async getUser(username) {
 		let res = await this.request(`users/${username}`);
 		return res.user;
 	}

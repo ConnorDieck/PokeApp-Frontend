@@ -23,6 +23,7 @@ const LoginForm = ({ login }) => {
 	// when submitted, runs login function the current user and token to state
 	const handleSubmit = evt => {
 		evt.preventDefault();
+		console.log(fData);
 		login(fData);
 		setFormData(INITIAL_STATE);
 		navigate("/");

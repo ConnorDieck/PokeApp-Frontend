@@ -4,7 +4,6 @@ import PokeappApi from "../api";
 export const fetchSpeciesFromAPI = () => {
 	return async function(dispatch) {
 		let species = await PokeappApi.getSpecies();
-		console.log(species);
 		return dispatch(fetchSpecies(species));
 	};
 };
