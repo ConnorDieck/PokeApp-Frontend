@@ -33,7 +33,7 @@ class PokeappApi {
 
 	// Individual API routes
 
-	/** Species */
+	/** Species ***********************************************/
 
 	/** Get details on a species by applying a filter. */
 
@@ -79,7 +79,7 @@ class PokeappApi {
 		return res;
 	}
 
-	/** Teams */
+	/** Teams ***********************************************/
 
 	/** Get details on available teams. */
 
@@ -130,6 +130,8 @@ class PokeappApi {
 		return res;
 	}
 
+	/** Users/Auth ***********************************************/
+
 	/** Register a new user and return received JWT token */
 	static async register(userData) {
 		let res = await this.request(`auth/register`, userData, "post");
@@ -152,6 +154,26 @@ class PokeappApi {
 	static async editFavorite(username, updateData) {
 		let res = await this.request(`users/${username}`, updateData, "patch");
 		return res;
+	}
+
+	//TODO: Add user delete method if appropriate
+
+	/** Items ***********************************************/
+
+	/** Get details on items with an optional filter. */
+
+	static async getItems(filter) {
+		let res = await this.request(`species`, filter);
+		return res.items;
+	}
+
+	/** Natures ***********************************************/
+
+	/** Get details on natures. */
+
+	static async getNatures() {
+		let res = await this.request(`natures`);
+		return res.natures;
 	}
 }
 
