@@ -9,6 +9,10 @@ export default combineReducers({
 
 /** PokeApp State:
  * {
+ * user: {
+ * 			username,
+ * 			favoriteId
+ * 		},
  * team: { 
  * 		name,
  * 		cards: [ {

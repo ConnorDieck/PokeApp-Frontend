@@ -1,10 +1,23 @@
 import "./App.css";
+import Navigator from "./Navigator";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { red, blue } from "@mui/material/colors";
+
+const theme = createTheme({
+	palette : {
+		primary   : red,
+		secondary : blue
+	}
+});
 
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header" />
-		</div>
+		<ThemeProvider theme={theme}>
+			<div className="App">
+				<header className="App-header" />
+				<Navigator />
+			</div>
+		</ThemeProvider>
 	);
 }
 
