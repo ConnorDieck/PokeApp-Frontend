@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { fetchSpeciesFromAPI } from "./actions/species";
+import { fetchSpeciesFromAPI } from "./actions/speciesActions";
 
 import PokeappApi from "./api";
 import jwt from "jsonwebtoken";
@@ -16,23 +16,21 @@ import NotFound from "./NotFound";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserFromAPI, editFavoriteInAPI, registerUser } from "./actions/users";
+import { loginUser, registerUser, setCurrentUser, editFavoriteInAPI } from "./actions/authActions";
 
 function Navigator() {
-	// TODO: update all references to currentUser in local state to redux store with dispatch
-	const currUser = useSelector(st => st.user);
-	const [ currentUser, setCurrentUser ] = useState(null);
 	const [ isLoading, setIsLoading ] = useState(true);
-	// Look in local storage for token
-	const [ token, setToken ] = useLocalStorage("token", "");
+	const { user, isAuthenticated } = useSelector(st => st.auth);
+	// // Look in local storage for token
+	// const [ token, setToken ] = useLocalStorage("token", "");
 	const dispatch = useDispatch();
 
-	console.debug("isLoading=", isLoading, "currentUser=", currUser.username, "token=", token);
+	console.debug("isLoading=", isLoading, "currentUser=", user.username, "token=", localStorage.getItem("token"));
 
 	async function login(userData) {
 		try {
-			let newToken = await PokeappApi.login(userData);
-			setToken(newToken);
+			dispatch(loginUser(userData));
+			// setToken(newToken);
 			return { success: true };
 		} catch (err) {
 			console.error("login failed", err);
@@ -42,7 +40,8 @@ function Navigator() {
 
 	async function register(userData) {
 		try {
-			dispatch(registerUser);
+			dispatch(registerUser(userData));
+			// setToken(newToken);
 			return { success: true };
 		} catch (err) {
 			console.error("signup failed", err);
@@ -50,18 +49,18 @@ function Navigator() {
 		}
 	}
 
-	async function editUserFavorite(username, updateData) {
+	async function editFavorite(username, updateData) {
 		try {
 			dispatch(editFavoriteInAPI(username, updateData));
 			return { sucess: true };
 		} catch (err) {
-			console.error("login failed", err);
+			console.error("edit failed", err);
 			return { success: false, err };
 		}
 	}
 
 	function logout() {
-		setToken(null);
+		// setToken(null);
 	}
 
 	// When app loads, pull species data from db
@@ -87,35 +86,35 @@ function Navigator() {
 	);
 
 	// When token changes, get info on user or set to null (if logged out)
-	useEffect(
-		function loadUserInfo() {
-			console.debug("Navigator useEffect loadUserInfo", "token=", token);
+	// useEffect(
+	// 	function loadUserInfo() {
+	// 		console.debug("Navigator useEffect loadUserInfo", "token=", token);
 
-			async function getUserInfo() {
-				if (token) {
-					try {
-						let { username } = jwt.decode(token);
-						PokeappApi.token = token;
-						dispatch(fetchUserFromAPI(username));
-					} catch (err) {
-						console.error("Navigator getUserInfo: Problem loading", err);
-						setCurrentUser(null);
-					}
-				} else {
-					setCurrentUser(null);
-				}
-				setIsLoading(false);
-			}
+	// 		async function getUserInfo() {
+	// 			if (token) {
+	// 				try {
+	// 					let { username } = jwt.decode(token);
+	// 					PokeappApi.token = token;
+	// 					dispatch(fetchUserFromAPI(username));
+	// 				} catch (err) {
+	// 					console.error("Navigator getUserInfo: Problem loading", err);
+	// 					setCurrentUser(null);
+	// 				}
+	// 			} else {
+	// 				setCurrentUser({});
+	// 			}
+	// 			setIsLoading(false);
+	// 		}
 
-			setIsLoading(true);
-			getUserInfo();
-		},
-		[ token, dispatch ]
-	);
+	// 		setIsLoading(true);
+	// 		getUserInfo();
+	// 	},
+	// 	[ token, dispatch ]
+	// );
 
-	if (isLoading) {
-		return <p>Loading...</p>;
-	}
+	// if (isLoading) {
+	// 	return <p>Loading...</p>;
+	// }
 
 	return (
 		<BrowserRouter>
@@ -133,13 +132,9 @@ function Navigator() {
 					path="/signup"
 					element={<SignupForm register={register} />}
 				/>
-				{/* <Route //
-					path="/favorite"
-					element={currentUser ? <EditFavoriteForm editFavorite={editUserFavorite} /> : <NotFound />}
-				/> */}
 				<Route //
 					path="/favorite"
-					element={<EditFavoriteForm editFavorite={editUserFavorite} />}
+					element={isAuthenticated ? <EditFavoriteForm editFavorite={editFavorite} /> : <NotFound />}
 				/>
 				<Route path="*" element={<NotFound />} />
 			</Routes>

@@ -1,4 +1,4 @@
-import { FETCH_SPECIES } from "../actions/types";
+import { FETCH_SPECIES } from "../actions/actionTypes";
 
 const species = (state = { species: [] }, action) => {
 	switch (action.type) {

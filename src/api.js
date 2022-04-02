@@ -33,6 +33,34 @@ class PokeappApi {
 
 	// Individual API routes
 
+	/** Users/Auth ***********************************************/
+
+	/** Register a new user and return received JWT token */
+	static async register(userData) {
+		let res = await this.request(`auth/register`, userData, "post");
+		return res.token;
+	}
+
+	// Signs a user in with username and password
+	static async login(userData) {
+		let res = await this.request(`auth/token`, userData, "post");
+		return res.token;
+	}
+
+	// Gets info on user of given username
+	static async getUser(username) {
+		let res = await this.request(`users/${username}`);
+		return res.user;
+	}
+
+	// Edits current user's favorite Pokemon
+	static async editFavorite(username, updateData) {
+		let res = await this.request(`users/${username}`, updateData, "patch");
+		return res;
+	}
+
+	//TODO: Add user delete method if appropriate
+
 	/** Species ***********************************************/
 
 	/** Get details on a species by applying a filter. */
@@ -129,34 +157,6 @@ class PokeappApi {
 		let res = await this.request(`teams/${teamId}/${cardId}`, "delete");
 		return res;
 	}
-
-	/** Users/Auth ***********************************************/
-
-	/** Register a new user and return received JWT token */
-	static async register(userData) {
-		let res = await this.request(`auth/register`, userData, "post");
-		return res.token;
-	}
-
-	// Signs a user in with username and password
-	static async login(userData) {
-		let res = await this.request(`auth/token`, userData, "post");
-		return res.token;
-	}
-
-	// Gets info on user of given username
-	static async getUser(username) {
-		let res = await this.request(`users/${username}`);
-		return res.user;
-	}
-
-	// Edits current user's favorite Pokemon
-	static async editFavorite(username, updateData) {
-		let res = await this.request(`users/${username}`, updateData, "patch");
-		return res;
-	}
-
-	//TODO: Add user delete method if appropriate
 
 	/** Items ***********************************************/
 

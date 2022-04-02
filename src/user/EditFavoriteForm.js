@@ -16,8 +16,6 @@ const EditFavoriteForm = ({ editFavorite }) => {
 		</MenuItem>
 	));
 
-	console.log(menuItems);
-
 	const [ fData, setFormData ] = useState(INITIAL_STATE);
 	const navigate = useNavigate();
 

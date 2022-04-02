@@ -4,10 +4,10 @@ import { Button } from "@mui/material"
 
 function Home() {
     // Layout varies depending on whether a user is present or not
-    const currentUser = useSelector(st => st.user)
+    const {isAuthenticated} = useSelector(st => st.auth)
 
     let options = {};
-    if (!currentUser.username) {
+    if (!isAuthenticated) {
         options = (
             <>
                 <Button variant="contained" color="secondary" href="/login">SIGN IN</Button>

@@ -26,11 +26,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function NavBar({ logout }) {
-	const currentUser = useSelector(st => st.user);
+	const { isAuthenticated, user } = useSelector(st => st.auth);
 	const classes = useStyles();
 	let Navs = {};
 
-	if (currentUser.username) {
+	if (isAuthenticated) {
 		Navs = (
 			<AppBar position="static">
 				<CssBaseline />
@@ -46,7 +46,7 @@ function NavBar({ logout }) {
 							Teams
 						</Link>
 						<Link to="/profile" className={classes.link}>
-							{currentUser.username} Profile
+							{user.username} Profile
 						</Link>
 						<Link to="/" className={classes.link} onClick={() => logout()}>
 							Logout

@@ -1,4 +1,4 @@
-import { FETCH_SPECIES } from "./types";
+import { FETCH_SPECIES } from "./actionTypes";
 import PokeappApi from "../api";
 
 export const fetchSpeciesFromAPI = () => {

@@ -1,19 +1,19 @@
 import cards from "./cards";
 import species from "./species";
-import user from "./user";
+import auth from "./auth";
 import { combineReducers } from "redux";
 
 export default combineReducers({
-	user,
+	auth,
 	cards,
 	species
 });
 
 /** PokeApp State:
  * {
- * user: {
- * 			username,
- * 			favoriteId
+ * auth: {
+ * 			isAuthenticated,
+ * 			user
  * 		},
  * team: { 
  * 		name,
