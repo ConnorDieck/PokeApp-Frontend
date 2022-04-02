@@ -16,7 +16,7 @@ import NotFound from "./NotFound";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserFromAPI, editFavoriteInAPI, registerUser, loginUser, logoutUser } from "./actions/users";
+import { fetchUserFromAPI, editFavoriteInAPI, registerUser } from "./actions/users";
 
 function Navigator() {
 	// TODO: update all references to currentUser in local state to redux store with dispatch
@@ -31,7 +31,8 @@ function Navigator() {
 
 	async function login(userData) {
 		try {
-			dispatch(loginUser(userData));
+			let newToken = await PokeappApi.login(userData);
+			setToken(newToken);
 			return { success: true };
 		} catch (err) {
 			console.error("login failed", err);
@@ -41,7 +42,7 @@ function Navigator() {
 
 	async function register(userData) {
 		try {
-			dispatch(registerUser(userData));
+			dispatch(registerUser);
 			return { success: true };
 		} catch (err) {
 			console.error("signup failed", err);
@@ -61,7 +62,6 @@ function Navigator() {
 
 	function logout() {
 		setToken(null);
-		dispatch(logoutUser());
 	}
 
 	// When app loads, pull species data from db

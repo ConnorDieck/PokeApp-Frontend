@@ -7,7 +7,7 @@ function Home() {
     const currentUser = useSelector(st => st.user)
 
     let options = {};
-    if (!currentUser) {
+    if (!currentUser.username) {
         options = (
             <>
                 <Button variant="contained" color="secondary" href="/login">SIGN IN</Button>
