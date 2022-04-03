@@ -27,9 +27,9 @@ function Navigator() {
 
 	console.debug("isLoading=", isLoading, "currentUser=", user.username, "token=", token);
 
-	async function login({ username = "cooperdoon", password = "letmein" }) {
+	async function login(userData) {
 		try {
-			let newToken = await PokeappApi.login({ username, password });
+			let newToken = await PokeappApi.login(userData);
 			console.log("new token from login:", newToken);
 			PokeappApi.token = newToken;
 			setToken(newToken);
@@ -56,10 +56,10 @@ function Navigator() {
 		}
 	}
 
-	async function editFavorite(username, updateData) {
+	async function editFavorite(updateData) {
 		try {
-			let user = await PokeappApi.editFavorite(username, updateData);
-			dispatch(setCurrentUser(user));
+			let u = await PokeappApi.editFavorite(user.username, updateData);
+			dispatch(setCurrentUser(u));
 			return { sucess: true };
 		} catch (err) {
 			console.error("edit failed", err);
@@ -103,8 +103,8 @@ function Navigator() {
 					try {
 						let { username } = jwt.decode(token);
 						PokeappApi.token = token;
-						let user = await PokeappApi.getUser(username);
-						dispatch(setCurrentUser(user));
+						let u = await PokeappApi.getUser(username);
+						dispatch(setCurrentUser(u));
 					} catch (err) {
 						console.error("Navigator getUserInfo: Problem loading", err);
 						dispatch(setCurrentUser({}));

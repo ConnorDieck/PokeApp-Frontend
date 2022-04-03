@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 
 const EditFavoriteForm = ({ editFavorite }) => {
 	let INITIAL_STATE = {
-		favoriteId : 1
+		id : ""
 	};
 
 	const species = useSelector(st => st.species);
-	let menuItems = Object.values(species).map(({ name, id }) => (
-		<MenuItem value={id} key={id}>
+	let menuItems = Object.values(species).map(({ name, id }, index) => (
+		<MenuItem value={id} key={index}>
 			{name}
 		</MenuItem>
 	));
@@ -21,8 +21,6 @@ const EditFavoriteForm = ({ editFavorite }) => {
 
 	const handleChange = evt => {
 		const { name, value } = evt.target;
-		console.log("name", name);
-		console.log("value", value);
 		setFormData(fData => ({
 			...fData,
 			[name] : value
@@ -31,8 +29,6 @@ const EditFavoriteForm = ({ editFavorite }) => {
 
 	// when submitted, runs editFavorite function the current user and token to state
 	const handleSubmit = evt => {
-		console.log("fData", fData);
-		console.log(evt);
 		evt.preventDefault();
 		editFavorite(fData);
 		setFormData(INITIAL_STATE);
@@ -67,9 +63,9 @@ const EditFavoriteForm = ({ editFavorite }) => {
 					<FormControl>
 						<Select //
 							label="Favorite"
-							id="favoriteId"
-							name="favoriteId"
-							value={fData.favoriteId}
+							id="id"
+							name="id"
+							value={fData.id}
 							onChange={handleChange}
 							placeholder="Favorite"
 							fullWidth
