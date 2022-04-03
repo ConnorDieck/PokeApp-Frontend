@@ -17,6 +17,7 @@ import NotFound from "./NotFound";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./actions/authActions";
+import UserProfile from "./user/UserProfile";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -132,6 +133,10 @@ function Navigator() {
 				<Route //
 					path="/"
 					element={<Home />}
+				/>
+				<Route //
+					path="/profile"
+					element={isAuthenticated ? <UserProfile /> : <NotFound />}
 				/>
 				<Route //
 					path="/login"
