@@ -9,9 +9,9 @@ import rootReducer from "./reducers/root";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import PokeappApi from "./api";
-import { setCurrentUser } from "./actions/authActions";
-import jwt from "jsonwebtoken";
+// import PokeappApi from "./api";
+// import { setCurrentUser } from "./actions/authActions";
+// import jwt from "jsonwebtoken";
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 

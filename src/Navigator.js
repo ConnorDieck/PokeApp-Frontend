@@ -16,21 +16,26 @@ import NotFound from "./NotFound";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, registerUser, setCurrentUser, editFavoriteInAPI } from "./actions/authActions";
+import { setCurrentUser } from "./actions/authActions";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { user, isAuthenticated } = useSelector(st => st.auth);
-	// // Look in local storage for token
-	// const [ token, setToken ] = useLocalStorage("token", "");
+	// Look in local storage for token
+	const [ token, setToken ] = useLocalStorage("token", "");
 	const dispatch = useDispatch();
 
-	console.debug("isLoading=", isLoading, "currentUser=", user.username, "token=", localStorage.getItem("token"));
+	console.debug("isLoading=", isLoading, "currentUser=", user.username, "token=", token);
 
-	async function login(userData) {
+	async function login({ username = "cooperdoon", password = "letmein" }) {
 		try {
-			dispatch(loginUser(userData));
-			// setToken(newToken);
+			let newToken = await PokeappApi.login({ username, password });
+			console.log("new token from login:", newToken);
+			PokeappApi.token = newToken;
+			setToken(newToken);
+			console.log("token from setToken:", token);
+			console.log("decoded user:", jwt.decode(newToken));
+			dispatch(setCurrentUser(jwt.decode(newToken)));
 			return { success: true };
 		} catch (err) {
 			console.error("login failed", err);
@@ -40,8 +45,10 @@ function Navigator() {
 
 	async function register(userData) {
 		try {
-			dispatch(registerUser(userData));
-			// setToken(newToken);
+			let newToken = await PokeappApi.register(userData);
+			PokeappApi.token = newToken;
+			setToken(newToken);
+			dispatch(setCurrentUser(jwt.decode(newToken)));
 			return { success: true };
 		} catch (err) {
 			console.error("signup failed", err);
@@ -51,7 +58,8 @@ function Navigator() {
 
 	async function editFavorite(username, updateData) {
 		try {
-			dispatch(editFavoriteInAPI(username, updateData));
+			let user = await PokeappApi.editFavorite(username, updateData);
+			dispatch(setCurrentUser(user));
 			return { sucess: true };
 		} catch (err) {
 			console.error("edit failed", err);
@@ -60,7 +68,7 @@ function Navigator() {
 	}
 
 	function logout() {
-		// setToken(null);
+		setToken(null);
 	}
 
 	// When app loads, pull species data from db
@@ -86,35 +94,36 @@ function Navigator() {
 	);
 
 	// When token changes, get info on user or set to null (if logged out)
-	// useEffect(
-	// 	function loadUserInfo() {
-	// 		console.debug("Navigator useEffect loadUserInfo", "token=", token);
+	useEffect(
+		function loadUserInfo() {
+			console.debug("Navigator useEffect loadUserInfo", "token=", token);
 
-	// 		async function getUserInfo() {
-	// 			if (token) {
-	// 				try {
-	// 					let { username } = jwt.decode(token);
-	// 					PokeappApi.token = token;
-	// 					dispatch(fetchUserFromAPI(username));
-	// 				} catch (err) {
-	// 					console.error("Navigator getUserInfo: Problem loading", err);
-	// 					setCurrentUser(null);
-	// 				}
-	// 			} else {
-	// 				setCurrentUser({});
-	// 			}
-	// 			setIsLoading(false);
-	// 		}
+			async function getUserInfo() {
+				if (token) {
+					try {
+						let { username } = jwt.decode(token);
+						PokeappApi.token = token;
+						let user = await PokeappApi.getUser(username);
+						dispatch(setCurrentUser(user));
+					} catch (err) {
+						console.error("Navigator getUserInfo: Problem loading", err);
+						dispatch(setCurrentUser({}));
+					}
+				} else {
+					dispatch(setCurrentUser({}));
+				}
+				setIsLoading(false);
+			}
 
-	// 		setIsLoading(true);
-	// 		getUserInfo();
-	// 	},
-	// 	[ token, dispatch ]
-	// );
+			setIsLoading(true);
+			getUserInfo();
+		},
+		[ token, dispatch ]
+	);
 
-	// if (isLoading) {
-	// 	return <p>Loading...</p>;
-	// }
+	if (isLoading) {
+		return <p>Loading...</p>;
+	}
 
 	return (
 		<BrowserRouter>

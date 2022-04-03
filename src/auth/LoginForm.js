@@ -5,8 +5,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const LoginForm = ({ login }) => {
 	let INITIAL_STATE = {
-		username : "",
-		password : ""
+		username : "cooperdoon",
+		password : "letmein"
 	};
 
 	const [ fData, setFormData ] = useState(INITIAL_STATE);
@@ -23,7 +23,6 @@ const LoginForm = ({ login }) => {
 	// when submitted, runs login function the current user and token to state
 	const handleSubmit = evt => {
 		evt.preventDefault();
-		console.log(fData);
 		login(fData);
 		setFormData(INITIAL_STATE);
 		navigate("/");
