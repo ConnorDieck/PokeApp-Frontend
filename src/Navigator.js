@@ -7,12 +7,12 @@ import jwt from "jsonwebtoken";
 
 /** Import any components needed */
 
-import NavBar from "./NavBar";
+import NavBar from "./util/NavBar";
 import Home from "./Home";
 import LoginForm from "./auth/LoginForm";
 import SignupForm from "./auth/SignupForm";
 import EditFavoriteForm from "./user/EditFavoriteForm";
-import NotFound from "./NotFound";
+import NotFound from "./util/NotFound";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
