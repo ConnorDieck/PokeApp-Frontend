@@ -21,6 +21,8 @@ import { setCurrentUser } from "./actions/authActions";
 import UserProfile from "./user/UserProfile";
 import { setCards } from "./actions/cardsActions";
 import CardView from "./cards/CardView";
+import { fetchItemsFromAPI } from "./actions/itemsActions";
+import { fetchNaturesFromAPI } from "./actions/naturesActions";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -73,16 +75,18 @@ function Navigator() {
 		setToken(null);
 	}
 
-	// When app loads, pull species data from db
+	// When app loads, pull species, items and nature data from db
 	useEffect(
-		function loadSpecies() {
-			console.debug("Navigator useEffect loadSpecies");
+		function loadData() {
+			console.debug("Navigator useEffect loadData");
 
-			async function getSpeciesInfo() {
+			async function getAllData() {
 				try {
 					dispatch(fetchSpeciesFromAPI());
+					dispatch(fetchItemsFromAPI());
+					dispatch(fetchNaturesFromAPI());
 				} catch (err) {
-					console.error("Navigator getUserInfo: Problem loading", err);
+					console.error("Navigator getAllData: Problem loading", err);
 					setCurrentUser(null);
 				}
 
@@ -90,7 +94,7 @@ function Navigator() {
 			}
 
 			setIsLoading(true);
-			getSpeciesInfo();
+			getAllData();
 		},
 		[ dispatch ]
 	);

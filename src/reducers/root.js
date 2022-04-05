@@ -1,12 +1,16 @@
 import cards from "./cards";
 import species from "./species";
 import auth from "./auth";
+import items from "./items";
+import natures from "./natures";
 import { combineReducers } from "redux";
 
 export default combineReducers({
 	auth,
 	cards,
-	species
+	species,
+	items,
+	natures
 });
 
 /** PokeApp State:

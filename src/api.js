@@ -163,7 +163,7 @@ class PokeappApi {
 	/** Get details on items with an optional filter. */
 
 	static async getItems(filter) {
-		let res = await this.request(`species`, filter);
+		let res = await this.request(`items`, filter);
 		return res.items;
 	}
 

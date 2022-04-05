@@ -33,11 +33,16 @@ function CardView() {
 			function getCardInfo() {
 				PokeappApi.getCard(cardId).then(r1 => {
 					setCardData(r1);
-					return axios.get(`${POKEAPI_URL}/pokemon/${r1.speciesId}`).then(r2 => {
-						let t = transform(r2.data);
-						setApiData(t);
-						setIsLoading(false);
-					});
+					return axios
+						.get(`${POKEAPI_URL}/pokemon/${r1.speciesId}`)
+						.then(r2 => {
+							let t = transform(r2.data);
+							setApiData(t);
+							setIsLoading(false);
+						})
+						.catch(err => {
+							console.error("CardView loadCardInfo: Problem loading", err);
+						});
 				});
 			}
 			setIsLoading(true);
