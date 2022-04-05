@@ -25,6 +25,7 @@ function CardView() {
 
 	const editLink = `cards/${cardId}/edit`;
 
+	// TODO: Review below code with mentor. How could we have made the it work with async/await?
 	useEffect(
 		function loadCard() {
 			console.debug("CardView useEffect loadCard");
@@ -44,49 +45,6 @@ function CardView() {
 		},
 		[ cardId ]
 	);
-
-	// TODO: Review below code with mentor. How could we have made the above work with async/await?
-	// useEffect(
-	// 	function loadCard() {
-	// 		console.debug("CardView useEffect loadCard");
-
-	// 		async function getCardInfo() {
-	// 			try {
-	// 				const res = await PokeappApi.getCard(cardId);
-	// 				setCardData(res);
-	// 			} catch (err) {
-	// 				console.error("CardView loadCardInfo: Problem loading", err);
-	// 			}
-	// 			setIsLoading(false);
-	// 		}
-	// 		setIsLoading(true);
-	// 		getCardInfo();
-	// 	},
-	// 	[ cardId ]
-	// );
-
-	// useEffect(
-	// 	function fetchAPI() {
-	// 		console.debug("CardView useEffect fetchAPI");
-
-	// 		async function fetchAPIInfo() {
-	// 			try {
-	// 				const res = await axios.get(`${POKEAPI_URL}/pokemon/${cardData.speciesId}`);
-	// 				let data = transform(res.data);
-	// 				setApiData(data);
-	// 			} catch (err) {
-	// 				console.error("CardView fetchAPIInfo: Problem loading", err);
-	// 			}
-	// 			setIsLoading(false);
-	// 		}
-	// 		setIsLoading(true);
-	// 		fetchAPIInfo();
-	// 	},
-	// 	[ cardData ]
-	// );
-
-	console.log("cardData:", cardData);
-	console.log("apiData:", apiData);
 
 	if (isLoading) return <p>loading...</p>;
 
