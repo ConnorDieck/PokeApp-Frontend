@@ -21,8 +21,9 @@ function CardView() {
 	const [ cardData, setCardData ] = useState({});
 	const [ apiData, setApiData ] = useState({});
 	const { cardId } = useParams();
-	const editLink = `cards/${cardId}/edit`;
 	const { user, isAuthenticated } = useSelector(st => st.auth);
+
+	const editLink = `cards/${cardId}/edit`;
 
 	useEffect(
 		function loadCard() {
