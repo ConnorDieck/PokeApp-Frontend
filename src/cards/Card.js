@@ -54,10 +54,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Card({ cardinfo }) {
+function Card({ cardinfo, api }) {
 	const classes = useStyles();
 	const species = useSelector(st => st.species[cardinfo.speciesId - 1]);
-	console.log(cardinfo);
 
 	// const paperStyle = {
 	// 	padding : 20,
@@ -70,7 +69,7 @@ function Card({ cardinfo }) {
 		<Grid>
 			<Paper elevation={10} className={classes.paper}>
 				<Grid align="center">
-					<img className={classes.image} src={cardinfo.art} alt="Pokemon Art" />
+					<img className={classes.image} src={api.art} alt="Pokemon Art" />
 				</Grid>
 				<h2>{species.name}</h2>
 				<h3>{cardinfo.name}</h3>
