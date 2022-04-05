@@ -6,7 +6,7 @@ import PokeappApi from "../api";
 import Card from "./Card";
 import { POKEAPI_URL } from "../util/pokeAPI";
 import axios from "axios";
-// import { transform } from "../helpers/transform";
+import { transform } from "../helpers/transform";
 
 /**
  * Component that loads card data and passes into card component. 
@@ -29,14 +29,15 @@ function CardView() {
 		function loadCard() {
 			console.debug("CardView useEffect loadCard");
 
-			async function getCardInfo() {
-				try {
-					const res = await PokeappApi.getCard(cardId);
-					setCardData(res);
-				} catch (err) {
-					console.error("CardView loadCardInfo: Problem loading", err);
-				}
-				setIsLoading(false);
+			function getCardInfo() {
+				PokeappApi.getCard(cardId).then(r1 => {
+					setCardData(r1);
+					return axios.get(`${POKEAPI_URL}/pokemon/${r1.speciesId}`).then(r2 => {
+						let t = transform(r2.data);
+						setApiData(t);
+						setIsLoading(false);
+					});
+				});
 			}
 			setIsLoading(true);
 			getCardInfo();
@@ -44,38 +45,50 @@ function CardView() {
 		[ cardId ]
 	);
 
-	useEffect(
-		function fetchAPI() {
-			console.debug("CardView useEffect fetchAPI");
+	// TODO: Review below code with mentor. How could we have made the above work with async/await?
+	// useEffect(
+	// 	function loadCard() {
+	// 		console.debug("CardView useEffect loadCard");
 
-			async function fetchAPIInfo() {
-				try {
-					const res = await axios.get(`${POKEAPI_URL}/pokemon/1`, {
-						headers : {
-							// Origin                           : "*",
-							"Content-Type" : "application/x-www-form-urlencoded"
-							// "Access-Control-Request-Methods" : "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-							// "Access-Control-Request-Headers" : "Origin, Content-Type, X-Auth-Token"
-						}
-					});
-					console.log(res);
-					// let data = transform(res);
-					// setApiData(data);
-				} catch (err) {
-					console.error("CardView fetchAPIInfo: Problem loading", err);
-				}
-				setIsLoading(false);
-			}
-			setIsLoading(true);
-			fetchAPIInfo();
-		},
-		[ cardData ]
-	);
+	// 		async function getCardInfo() {
+	// 			try {
+	// 				const res = await PokeappApi.getCard(cardId);
+	// 				setCardData(res);
+	// 			} catch (err) {
+	// 				console.error("CardView loadCardInfo: Problem loading", err);
+	// 			}
+	// 			setIsLoading(false);
+	// 		}
+	// 		setIsLoading(true);
+	// 		getCardInfo();
+	// 	},
+	// 	[ cardId ]
+	// );
+
+	// useEffect(
+	// 	function fetchAPI() {
+	// 		console.debug("CardView useEffect fetchAPI");
+
+	// 		async function fetchAPIInfo() {
+	// 			try {
+	// 				const res = await axios.get(`${POKEAPI_URL}/pokemon/${cardData.speciesId}`);
+	// 				let data = transform(res.data);
+	// 				setApiData(data);
+	// 			} catch (err) {
+	// 				console.error("CardView fetchAPIInfo: Problem loading", err);
+	// 			}
+	// 			setIsLoading(false);
+	// 		}
+	// 		setIsLoading(true);
+	// 		fetchAPIInfo();
+	// 	},
+	// 	[ cardData ]
+	// );
 
 	console.log("cardData:", cardData);
 	console.log("apiData:", apiData);
 
-	if (isLoading) return "Loading...";
+	if (isLoading) return <p>loading...</p>;
 
 	return (
 		<Container>
