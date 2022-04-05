@@ -4,6 +4,7 @@ import { AppBar, Toolbar, CssBaseline, Typography, useMediaQuery, useTheme } fro
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 import DrawerComponent from "./Drawer";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
 const useStyles = makeStyles(theme => ({
 	navlinks : {
@@ -39,7 +40,7 @@ function NavBar({ logout }) {
 				<CssBaseline />
 				<Toolbar>
 					<Typography variant="h4" className={classes.logo}>
-						PokeApp
+						P<CatchingPokemonIcon />keApp
 					</Typography>
 					{isMobile ? (
 						<DrawerComponent logout={logout} />

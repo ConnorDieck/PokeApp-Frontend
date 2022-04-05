@@ -13,11 +13,14 @@ import LoginForm from "./auth/LoginForm";
 import SignupForm from "./auth/SignupForm";
 import EditFavoriteForm from "./user/EditFavoriteForm";
 import NotFound from "./util/NotFound";
+import CardList from "./cards/CardList";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./actions/authActions";
 import UserProfile from "./user/UserProfile";
+import { setCards } from "./actions/cardsActions";
+import CardView from "./cards/CardView";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -34,8 +37,6 @@ function Navigator() {
 			console.log("new token from login:", newToken);
 			PokeappApi.token = newToken;
 			setToken(newToken);
-			console.log("token from setToken:", token);
-			console.log("decoded user:", jwt.decode(newToken));
 			dispatch(setCurrentUser(jwt.decode(newToken)));
 			return { success: true };
 		} catch (err) {
@@ -110,6 +111,13 @@ function Navigator() {
 						console.error("Navigator getUserInfo: Problem loading", err);
 						dispatch(setCurrentUser({}));
 					}
+					try {
+						let cards = await PokeappApi.getCards();
+						dispatch(setCards(cards));
+					} catch (err) {
+						console.error("Navigator getUserInfo: Problem loading cards", err);
+						dispatch(setCards({}));
+					}
 				} else {
 					dispatch(setCurrentUser({}));
 				}
@@ -138,6 +146,38 @@ function Navigator() {
 					path="/profile"
 					element={isAuthenticated ? <UserProfile /> : <NotFound />}
 				/>
+				{/* <Route //
+					path="/teams"
+					element={isAuthenticated ? <TeamsList /> : <NotFound />}
+				/>
+				<Route //
+					path="/teams/new"
+					element={<TeamsForm />}
+				/>
+				<Route //
+					path="/teams/:teamId"
+					element={<TeamView />}
+				/>
+				<Route //
+					path="/teams/:teamId/edit"
+					element={<TeamsForm />}
+				/> */}
+				<Route //
+					path="/cards"
+					element={isAuthenticated ? <CardList /> : <NotFound />}
+				/>
+				{/* <Route //
+					path="/cards/new"
+					element={<CardForm />}
+				/> */}
+				<Route //
+					path="/cards/:cardId"
+					element={<CardView />}
+				/>
+				{/* <Route //
+					path="/cards/:cardId/edit"
+					element={<CardForm />}
+				/> */}
 				<Route //
 					path="/login"
 					element={<LoginForm login={login} />}

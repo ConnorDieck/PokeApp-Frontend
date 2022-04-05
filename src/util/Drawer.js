@@ -17,7 +17,7 @@ const useStyles = makeStyles(() =>({
 }));
 
 function DrawerComponent({logout}) {
-    const classes = useStyles;
+    const classes = useStyles();
     const [ openDrawer, setOpenDrawer ] = useState(false);
     const {user, isAuthenticated} = useSelector(st => st.auth)
 
@@ -61,7 +61,7 @@ function DrawerComponent({logout}) {
                         </ListItem>
                     </List>
                 </Drawer>
-                <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+                <IconButton onClick={() => setOpenDrawer(!openDrawer)} className={classes.icon}>
                     <MenuIcon />
                 </IconButton>
             </>
@@ -104,7 +104,7 @@ function DrawerComponent({logout}) {
                         </ListItem>
                     </List>
                 </Drawer>
-                <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+                <IconButton onClick={() => setOpenDrawer(!openDrawer)} className={classes.icon}>
                     <MenuIcon />
                 </IconButton>
             </>
