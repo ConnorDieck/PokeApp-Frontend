@@ -26,6 +26,7 @@ function CardView() {
 	const editLink = `cards/${cardId}/edit`;
 
 	// TODO: Review below code with mentor. How could we have made the it work with async/await?
+	// TODO: Need to pass species info to this. Current call to PokeAPI will mess up due to forms. Need to use url in species. UPDATE: SOLVED by setting "art" category to species url. Will need to update backend to account for this (rename to url and update tests maybe - low priority since current structure should work, naming is just weird).
 	useEffect(
 		function loadCard() {
 			console.debug("CardView useEffect loadCard");

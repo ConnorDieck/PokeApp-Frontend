@@ -14,6 +14,7 @@ import SignupForm from "./auth/SignupForm";
 import EditFavoriteForm from "./user/EditFavoriteForm";
 import NotFound from "./util/NotFound";
 import CardList from "./cards/CardList";
+import NewCardForm from "./cards/NewCardForm";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
@@ -170,10 +171,10 @@ function Navigator() {
 					path="/cards"
 					element={isAuthenticated ? <CardList /> : <NotFound />}
 				/>
-				{/* <Route //
-					path="/cards/new"
-					element={<CardForm />}
-				/> */}
+				<Route //
+					path="/cards/new/:speciesId"
+					element={<NewCardForm />}
+				/>
 				<Route //
 					path="/cards/:cardId"
 					element={<CardView />}
