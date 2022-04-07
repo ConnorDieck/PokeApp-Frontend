@@ -3,14 +3,15 @@ import { ADD_CARD, SET_CARDS } from "../actions/actionTypes";
 const cards = (state = {}, action) => {
 	switch (action.type) {
 		case SET_CARDS:
+			let cards = { ...state };
+			action.cards.forEach(c => (cards[c.name] = { ...c }));
 			return {
-				...action.cards
+				...cards
 			};
 		case ADD_CARD:
-			let newCard = action.card;
 			return {
 				...state,
-				newCard
+				[action.card.name]: { ...action.card }
 			};
 		default:
 			return state;

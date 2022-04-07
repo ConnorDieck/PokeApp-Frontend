@@ -11,7 +11,7 @@ import ItemList from "../util/ItemList";
  */
 
 function CardList() {
-	const items = useSelector(st => Object.values(st.cards).map(c => ({ ...c, url: `/cards/${c.id}` })));
+	const items = useSelector(st => Object.values(st.cards).map(c => ({ ...c, localurl: `/cards/${c.id}` })));
 	return <ItemList title="Cards" items={items} />;
 }
 

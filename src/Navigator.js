@@ -24,6 +24,8 @@ import { setCards } from "./actions/cardsActions";
 import CardView from "./cards/CardView";
 import { fetchItemsFromAPI } from "./actions/itemsActions";
 import { fetchNaturesFromAPI } from "./actions/naturesActions";
+import EditCardForm from "./cards/EditCardForm";
+import SpeciesMenu from "./species/SpeciesMenu";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -151,6 +153,10 @@ function Navigator() {
 					path="/profile"
 					element={isAuthenticated ? <UserProfile /> : <NotFound />}
 				/>
+				<Route //
+					path="/species"
+					element={<SpeciesMenu />}
+				/>
 				{/* <Route //
 					path="/teams"
 					element={isAuthenticated ? <TeamsList /> : <NotFound />}
@@ -169,7 +175,7 @@ function Navigator() {
 				/> */}
 				<Route //
 					path="/cards"
-					element={isAuthenticated ? <CardList /> : <NotFound />}
+					element={<CardList />}
 				/>
 				<Route //
 					path="/cards/new/:speciesId"
@@ -179,10 +185,10 @@ function Navigator() {
 					path="/cards/:cardId"
 					element={<CardView />}
 				/>
-				{/* <Route //
+				<Route //
 					path="/cards/:cardId/edit"
-					element={<CardForm />}
-				/> */}
+					element={<EditCardForm />}
+				/>
 				<Route //
 					path="/login"
 					element={<LoginForm login={login} />}

@@ -41,7 +41,27 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const NewCardForm = () => {
+const EditCardForm = () => {
+	const { cardId } = useParams();
+	const cardData = useSelector(st => Object.values(st.cards).filter(c => c.id === +cardId)[0]);
+
+	/** MQ: Why does setting the inital state to depend on cardData cause onSubmit() to fail? Even if you
+     *  don't reset the form data to this and just set it to empty 
+     * 
+    */
+
+	// let INITIAL_STATE = {
+	// 	name    : cardData.name,
+	// 	ability : cardData.ability,
+	// 	move1   : {},
+	// 	move2   : {},
+	// 	move3   : {},
+	// 	move4   : {},
+	// 	item    : cardData.item,
+	// 	nature  : cardData.nature,
+	// 	gender  : cardData.gender
+	// };
+
 	let INITIAL_STATE = {
 		name    : "",
 		ability : {},
@@ -51,7 +71,7 @@ const NewCardForm = () => {
 		move4   : {},
 		item    : "",
 		nature  : "",
-		gender  : true
+		gender  : ""
 	};
 
 	const [ fData, setFormData ] = useState(INITIAL_STATE);
@@ -63,28 +83,25 @@ const NewCardForm = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
-	const { speciesId } = useParams();
-
 	useEffect(
-		function loadSpecies() {
-			console.debug("NewCardForm useEffect loadSpecies");
+		function loadData() {
+			console.debug("EditCardForm useEffect loadSpecies");
 
 			async function getSpeciesInfo() {
 				try {
-					let res = await axios.get(species[speciesId].url);
-
+					let res = await axios.get(cardData.url);
 					let t = transform(res.data);
 					setApiData(t);
 					console.log("api data", apiData);
 					setIsLoading(false);
 				} catch (err) {
-					console.error("NewCardForm getSpeciesInfo: Problem loading", err);
+					console.error("EditCardForm getSpeciesInfo: Problem loading", err);
 				}
 			}
 			setIsLoading(true);
 			getSpeciesInfo();
 		},
-		[ species, speciesId ]
+		[ cardId ]
 	);
 
 	const handleChange = evt => {
@@ -139,19 +156,29 @@ const NewCardForm = () => {
 		let formattedData = {
 			name      : fData.name,
 			ability   : fData.ability.name,
-			url       : species[speciesId].url,
+			url       : cardData.url,
 			gender    : fData.gender,
 			item      : fData.item,
 			nature    : fData.nature,
-			speciesId : +speciesId,
+			speciesId : cardData.speciesId,
 			moves     : [ fData.move1.name, fData.move2.name, fData.move3.name, fData.move4.name ]
 		};
 
 		if (isAuthenticated) {
-			await PokeappApi.addCard(formattedData);
+			await PokeappApi.editCard(formattedData, cardId);
 		}
 		dispatch(addCard(formattedData));
-		setFormData(INITIAL_STATE);
+		setFormData({
+			name    : "",
+			ability : {},
+			move1   : {},
+			move2   : {},
+			move3   : {},
+			move4   : {},
+			item    : "",
+			nature  : "",
+			gender  : ""
+		});
 		navigate("/");
 	};
 
@@ -163,7 +190,7 @@ const NewCardForm = () => {
 				<Grid align="center">
 					<img src={apiData.art} className={classes.image} alt="Pokemon art" />
 				</Grid>
-				<h2>{species[speciesId].name}</h2>
+				<h2>{species[cardData.speciesId].name}</h2>
 				<form className="auth-form" onSubmit={handleSubmit}>
 					<Grid align="center" container spacing={1}>
 						<Grid item xs={8}>
@@ -353,4 +380,4 @@ const NewCardForm = () => {
 	);
 };
 
-export default NewCardForm;
+export default EditCardForm;

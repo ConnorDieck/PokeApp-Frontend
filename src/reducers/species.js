@@ -1,10 +1,12 @@
 import { FETCH_SPECIES } from "../actions/actionTypes";
 
-const species = (state = { species: [] }, action) => {
+const species = (state = {}, action) => {
 	switch (action.type) {
 		case FETCH_SPECIES:
 			// Adds species from API to state
-			return { ...state, ...action.species };
+			let species = { ...state };
+			action.species.forEach(s => (species[s.id] = { ...s }));
+			return { ...species };
 		default:
 			return state;
 	}

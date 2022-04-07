@@ -1,10 +1,9 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import PokeappApi from "../api";
 import Card from "./Card";
-import { POKEAPI_URL } from "../util/pokeAPI";
 import axios from "axios";
 import { transform } from "../helpers/transform";
 
@@ -23,19 +22,15 @@ function CardView() {
 	const { cardId } = useParams();
 	const { user, isAuthenticated } = useSelector(st => st.auth);
 
-	const editLink = `cards/${cardId}/edit`;
-
-	// TODO: Review below code with mentor. How could we have made the it work with async/await?
-	// TODO: Need to pass species info to this. Current call to PokeAPI will mess up due to forms. Need to use url in species. UPDATE: SOLVED by setting "art" category to species url. Will need to update backend to account for this (rename to url and update tests maybe - low priority since current structure should work, naming is just weird).
 	useEffect(
 		function loadCard() {
-			console.debug("CardView useEffect loadCard");
+			console.debug(`CardView useEffect loadCard cardId: ${cardId}`);
 
 			function getCardInfo() {
 				PokeappApi.getCard(cardId).then(r1 => {
 					setCardData(r1);
 					return axios
-						.get(`${POKEAPI_URL}/pokemon/${r1.speciesId}`)
+						.get(`${r1.url}`)
 						.then(r2 => {
 							let t = transform(r2.data);
 							setApiData(t);
@@ -57,7 +52,9 @@ function CardView() {
 	return (
 		<Container>
 			<Card cardinfo={cardData} api={apiData} />
-			{isAuthenticated ? <Link to={editLink}>Edit</Link> : <Typography>Owner: {user.username}</Typography>}
+			<Grid align="center">
+				{isAuthenticated ? <Link to={`edit`}>Edit</Link> : <Typography>Owner: {user.username}</Typography>}
+			</Grid>
 		</Container>
 	);
 }

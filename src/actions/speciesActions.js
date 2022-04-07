@@ -8,7 +8,7 @@ export const fetchSpeciesFromAPI = () => {
 	};
 };
 
-const fetchSpecies = species => {
+export const fetchSpecies = species => {
 	return {
 		type    : FETCH_SPECIES,
 		species

@@ -70,6 +70,20 @@ class PokeappApi {
 		return res.species;
 	}
 
+	/** Abilities ***********************************************/
+
+	static async addAbility(ability) {
+		let res = await this.request(`abilities`, ability, "post");
+		return res;
+	}
+
+	/** Moves ***********************************************/
+
+	static async addMove(move) {
+		let res = await this.request(`moves`, move, "post");
+		return res;
+	}
+
 	/** Cards ***********************************************/
 
 	/** Get details on available cards. */

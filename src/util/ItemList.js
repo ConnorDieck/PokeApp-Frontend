@@ -20,7 +20,7 @@ function ItemList({items, title}) {
           <ul style={{ fontSize: "120%" }}>
             {items.map(item =>
               <li key={item.id}>
-                <Link to={item.url}>
+                <Link to={item.localurl}>
                   {item.name}
                 </Link>
               </li>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material"
+import { Link } from "react-router-dom"
 
 function Home() {
     // Layout varies depending on whether a user is present or not
@@ -10,17 +11,17 @@ function Home() {
     if (!isAuthenticated) {
         options = (
             <>
-                <Button variant="contained" color="secondary" href="/login">SIGN IN</Button>
+                <Button component={Link} to="/login" variant="contained" color="secondary" >SIGN IN</Button>
                 <p>OR</p>
-                <Button variant="text" color="primary" href="/teams">GET STARTED</Button>
+                <Button component={Link} to="/species" variant="text" color="primary">DEMO</Button>
             </>
         )
     } else {
         options = (
             <>
-                <Button variant="contained" color="secondary">LOAD TEAMS</Button>
+                <Button component={Link} to="/teams" variant="contained" color="secondary">LOAD TEAMS</Button>
                 <p>OR</p>
-                <Button variant="text" color="primary">CREATE NEW</Button>
+                <Button component={Link} to="/teams/new" variant="text" color="primary">CREATE NEW TEAM</Button>
             </>
         )
     }
