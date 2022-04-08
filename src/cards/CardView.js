@@ -1,7 +1,7 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import PokeappApi from "../api";
 import Card from "./Card";
 import axios from "axios";
@@ -21,6 +21,12 @@ function CardView() {
 	const [ apiData, setApiData ] = useState({});
 	const { cardId } = useParams();
 	const { user, isAuthenticated } = useSelector(st => st.auth);
+	const navigate = useNavigate();
+
+	async function deleteCard() {
+		await PokeappApi.deleteCard(cardId);
+		navigate("/");
+	}
 
 	useEffect(
 		function loadCard() {
@@ -53,7 +59,18 @@ function CardView() {
 		<Container>
 			<Card cardinfo={cardData} api={apiData} />
 			<Grid align="center">
-				{isAuthenticated ? <Link to={`edit`}>Edit</Link> : <Typography>Owner: {user.username}</Typography>}
+				{isAuthenticated ? (
+					<div>
+						<Button component={Link} to="edit" variant="contained" color="secondary">
+							EDIT
+						</Button>
+						<Button onClick={deleteCard} variant="contained" color="primary" style={{ margin: "1" }}>
+							DELETE
+						</Button>
+					</div>
+				) : (
+					<Typography>Owner: {user.username}</Typography>
+				)}
 			</Grid>
 		</Container>
 	);
