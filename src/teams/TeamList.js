@@ -12,7 +12,7 @@ import ItemList from "../util/ItemList";
 
 function TeamList() {
 	const items = useSelector(st => Object.values(st.teams).map(t => ({ ...t, localurl: `/teams/${t.id}` })));
-	return <ItemList title="teams" items={items} />;
+	return <ItemList title="Teams" items={items} />;
 }
 
 export default TeamList;
