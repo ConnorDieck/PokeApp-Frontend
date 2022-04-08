@@ -88,6 +88,7 @@ function AddCardList() {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<h1>Pokemon</h1>
+			<p>Add a Pokemon to your team!</p>
 			<Button component={Link} to={"new"} color="secondary">
 				CREATE
 			</Button>

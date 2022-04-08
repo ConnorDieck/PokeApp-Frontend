@@ -78,7 +78,7 @@ function TeamView() {
 						</Grid>
 					</Box>
 				) : (
-					<Typography>Owner: {user.username}</Typography>
+					<Typography>Owner: {teamData.username}</Typography>
 				)}
 			</Grid>
 		</Container>

@@ -1,4 +1,4 @@
-import { Select, TextField, MenuItem } from "@mui/material";
+import { Select, TextField, MenuItem, Button, FormLabel } from "@mui/material";
 import React, { useState } from "react";
 
 const SearchBar = ({ search }) => {
@@ -54,6 +54,7 @@ const SearchBar = ({ search }) => {
 				onChange={handleChange}
 				placeholder="Name..."
 			/>
+			<FormLabel htmlFor="type">Type:</FormLabel>
 			<Select //
 				id="type"
 				name="type"
@@ -63,7 +64,9 @@ const SearchBar = ({ search }) => {
 			>
 				{types.map(t => <MenuItem value={t}>{t}</MenuItem>)}
 			</Select>
-			<button className="searchBtn">Submit</button>
+			<Button color="secondary" variant="contained" type="submit">
+				Search
+			</Button>
 		</form>
 	);
 };

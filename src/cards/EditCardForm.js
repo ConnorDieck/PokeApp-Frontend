@@ -4,7 +4,7 @@ import { Grid, Select, FormControl, TextField, Button, Paper, MenuItem, FormLabe
 import { makeStyles } from "@mui/styles";
 import PokeappApi from "../api";
 import { useDispatch, useSelector } from "react-redux";
-import { addCard } from "../actions/cardsActions";
+import { editCard } from "../actions/cardsActions";
 import { transform } from "../helpers/transform";
 import axios from "axios";
 
@@ -45,8 +45,9 @@ const EditCardForm = () => {
 	const { cardId } = useParams();
 	const cardData = useSelector(st => Object.values(st.cards).filter(c => c.id === +cardId)[0]);
 
-	/** MQ: Why does setting the inital state to depend on cardData cause onSubmit() to fail? Even if you
-     *  don't reset the form data to this and just set it to empty 
+	/** MQ: Why does setting the inital state to depend on cardData cause onSubmit()
+	 *  to fail? Even if you don't reset the form data to this and just set it to
+	 *  empty 
      * 
     */
 
@@ -77,32 +78,28 @@ const EditCardForm = () => {
 	const [ fData, setFormData ] = useState(INITIAL_STATE);
 	const [ apiData, setApiData ] = useState({});
 	const [ isLoading, setIsLoading ] = useState(true);
-	const { isAuthenticated } = useSelector(st => st.auth);
 	const { items, species, natures } = useSelector(st => st);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
-	useEffect(
-		function loadData() {
-			console.debug("EditCardForm useEffect loadSpecies");
+	useEffect(function loadData() {
+		console.debug("EditCardForm useEffect loadSpecies");
 
-			async function getSpeciesInfo() {
-				try {
-					let res = await axios.get(cardData.url);
-					let t = transform(res.data);
-					setApiData(t);
-					console.log("api data", apiData);
-					setIsLoading(false);
-				} catch (err) {
-					console.error("EditCardForm getSpeciesInfo: Problem loading", err);
-				}
+		async function getSpeciesInfo() {
+			try {
+				let res = await axios.get(cardData.url);
+				let t = transform(res.data);
+				setApiData(t);
+				console.log("api data", apiData);
+				setIsLoading(false);
+			} catch (err) {
+				console.error("EditCardForm getSpeciesInfo: Problem loading", err);
 			}
-			setIsLoading(true);
-			getSpeciesInfo();
-		},
-		[ cardId ]
-	);
+		}
+		setIsLoading(true);
+		getSpeciesInfo();
+	}, []);
 
 	const handleChange = evt => {
 		const { name, value } = evt.target;
@@ -164,22 +161,11 @@ const EditCardForm = () => {
 			moves     : [ fData.move1.name, fData.move2.name, fData.move3.name, fData.move4.name ]
 		};
 
-		if (isAuthenticated) {
-			await PokeappApi.editCard(formattedData, cardId);
-		}
-		dispatch(addCard(formattedData));
-		setFormData({
-			name    : "",
-			ability : {},
-			move1   : {},
-			move2   : {},
-			move3   : {},
-			move4   : {},
-			item    : "",
-			nature  : "",
-			gender  : ""
-		});
-		navigate("/");
+		await PokeappApi.editCard(formattedData, cardId);
+
+		dispatch(editCard(cardData, formattedData));
+		setFormData(INITIAL_STATE);
+		navigate("/cards");
 	};
 
 	if (isLoading) return <p>loading...</p>;

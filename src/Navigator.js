@@ -33,6 +33,8 @@ import { fetchNaturesFromAPI } from "./actions/naturesActions";
 
 import { setTeams } from "./actions/teamsActions";
 import AddCardList from "./cards/AddCardList";
+import NewTeamForm from "./teams/NewTeamForm";
+import EditTeamForm from "./teams/EditTeamForm";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -181,20 +183,29 @@ function Navigator() {
 				/>
 				<Route //
 					path="/teams/:teamId/add"
-					element={<AddCardList />}
+					element={isAuthenticated ? <AddCardList /> : <NotFound />}
 				/>
-				{/* <Route //
+				<Route //
+					path="/teams/:teamId/add/new"
+					element={isAuthenticated ? <SpeciesMenu /> : <NotFound />}
+				/>
+
+				<Route //
+					path="/teams/:teamId/cards/new/:speciesId"
+					element={isAuthenticated ? <NewCardForm /> : <NotFound />}
+				/>
+				<Route //
 					path="/teams/new"
-					element={<TeamsForm />}
+					element={isAuthenticated ? <NewTeamForm /> : <NotFound />}
 				/>
 
 				<Route //
 					path="/teams/:teamId/edit"
-					element={<TeamsForm />}
-				/> */}
+					element={<EditTeamForm />}
+				/>
 				<Route //
 					path="/cards"
-					element={<CardList />}
+					element={isAuthenticated ? <CardList /> : <NotFound />}
 				/>
 				<Route //
 					path="/cards/new/:speciesId"
@@ -206,7 +217,7 @@ function Navigator() {
 				/>
 				<Route //
 					path="/cards/:cardId/edit"
-					element={<EditCardForm />}
+					element={isAuthenticated ? <EditCardForm /> : <NotFound />}
 				/>
 				<Route //
 					path="/login"

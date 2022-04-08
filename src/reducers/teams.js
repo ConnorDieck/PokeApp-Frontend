@@ -1,9 +1,10 @@
-import { ADD_TEAM, SET_TEAMS } from "../actions/actionTypes";
+import { ADD_TEAM, EDIT_TEAM, SET_TEAMS } from "../actions/actionTypes";
 
 const teams = (state = {}, action) => {
+	let teams = {};
 	switch (action.type) {
 		case SET_TEAMS:
-			let teams = { ...state };
+			teams = { ...state };
 			action.teams.forEach(t => (teams[t.name] = { ...t }));
 			return {
 				...teams
@@ -12,6 +13,15 @@ const teams = (state = {}, action) => {
 			return {
 				...state,
 				[action.team.name]: { ...action.team }
+			};
+		case EDIT_TEAM:
+			teams = { ...state };
+			teams[action.newTeam.name] = action.newTeam;
+
+			delete teams[action.oldTeam.name];
+
+			return {
+				...teams
 			};
 		default:
 			return state;

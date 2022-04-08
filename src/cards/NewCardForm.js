@@ -63,7 +63,7 @@ const NewCardForm = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
-	const { speciesId } = useParams();
+	const { speciesId, teamId } = useParams();
 
 	useEffect(
 		function loadSpecies() {
@@ -148,11 +148,12 @@ const NewCardForm = () => {
 		};
 
 		if (isAuthenticated) {
-			await PokeappApi.addCard(formattedData);
+			let res = await PokeappApi.addCard(formattedData);
+			if (teamId) await PokeappApi.addCardToTeam(teamId, res.id);
 		}
 		dispatch(addCard(formattedData));
 		setFormData(INITIAL_STATE);
-		navigate("/");
+		navigate("/cards");
 	};
 
 	if (isLoading) return <p>loading...</p>;

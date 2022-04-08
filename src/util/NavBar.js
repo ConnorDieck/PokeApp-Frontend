@@ -81,9 +81,6 @@ function NavBar({ logout }) {
 							<Link to="/" className={classes.link}>
 								Home
 							</Link>
-							<Link to="/teams" className={classes.link}>
-								Teams
-							</Link>
 							<Link to="/login" className={classes.link}>
 								Login
 							</Link>

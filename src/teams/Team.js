@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 function Team({ team }) {
 	const species = useSelector(st => st.species);
+	const { isAuthenticated } = useSelector(st => st.auth);
 	const classes = useStyles;
 	const navigate = useNavigate();
 
@@ -56,30 +57,52 @@ function Team({ team }) {
 		<Box sx={{ flexGrow: 1 }} className={classes.wrap}>
 			<h3>{team.name}</h3>
 			<Grid container spacing={2}>
-				{members.map(
-					(m, index) =>
-						m.id ? (
-							<Grid item xs={4}>
-								<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
-									<Link to={`/cards/${m.id}`}>
-										<img src={species[m.speciesId].sprite} />
-									</Link>
-									<p>{m.name}</p>
-
-									<Button onClick={() => remove(m.id)}>Remove</Button>
-								</Item>
-							</Grid>
-						) : (
-							<Grid item xs={4}>
-								<Item style={{ backgroundColor: "#ffffeb" }} key={index}>
-									{m}
-									<p>???</p>
-									<Button component={Link} to="add" variant="contained" color="secondary">
-										ADD
-									</Button>
-								</Item>
-							</Grid>
-						)
+				{isAuthenticated ? (
+					members.map(
+						(m, index) =>
+							m.id ? (
+								<Grid item xs={4}>
+									<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
+										<Link to={`/cards/${m.id}`}>
+											<img src={species[m.speciesId].sprite} />
+										</Link>
+										<p>{m.name}</p>
+										<Button onClick={() => remove(m.id)}>Remove</Button>
+									</Item>
+								</Grid>
+							) : (
+								<Grid item xs={4}>
+									<Item style={{ backgroundColor: "#ffffeb" }} key={index}>
+										{m}
+										<p>???</p>
+										<Button component={Link} to="add" variant="contained" color="secondary">
+											ADD
+										</Button>
+									</Item>
+								</Grid>
+							)
+					)
+				) : (
+					members.map(
+						(m, index) =>
+							m.id ? (
+								<Grid item xs={4}>
+									<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
+										<Link to={`/cards/${m.id}`}>
+											<img src={species[m.speciesId].sprite} />
+										</Link>
+										<p>{m.name}</p>
+									</Item>
+								</Grid>
+							) : (
+								<Grid item xs={4}>
+									<Item style={{ backgroundColor: "#ffffeb" }} key={index}>
+										{m}
+										<p>???</p>
+									</Item>
+								</Grid>
+							)
+					)
 				)}
 			</Grid>
 		</Box>

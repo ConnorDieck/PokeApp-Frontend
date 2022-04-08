@@ -25,10 +25,13 @@ function CardList() {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<h1>Pokemon</h1>
+			<Button component={Link} to={"/species"} color="secondary">
+				CREATE
+			</Button>
 			<Grid container spacing={2}>
 				{items.map(m => (
-					<Grid item xs={4}>
-						<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
+					<Grid item xs={4} key={m.id}>
+						<Item style={{ backgroundColor: "#ffffeb" }}>
 							<Link to={m.localurl}>
 								<img src={species[m.speciesId].sprite} />
 							</Link>

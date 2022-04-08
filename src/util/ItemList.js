@@ -1,5 +1,6 @@
 
    
+import { Button } from '@mui/material';
 import React from 'react';
 import { Link } from "react-router-dom";
 
@@ -11,10 +12,11 @@ import { Link } from "react-router-dom";
  * 
  */
 
-function ItemList({items, title}) {
+function ItemList({items, title, newLink}) {
   return (
     <>
       <h1 className="my-3">{title}</h1>
+      <Button component={Link} to={newLink} color="secondary">NEW</Button>
       {items.length !== 0
         ? (
           <ul style={{ fontSize: "120%" }}>

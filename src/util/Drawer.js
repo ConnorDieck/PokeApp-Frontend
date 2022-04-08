@@ -90,13 +90,6 @@ function DrawerComponent({logout}) {
                         </ListItem>
                         <ListItem onClick={() => setOpenDrawer(false)}>
                             <ListItemText>
-                                <Link to="/teams" className={classes.link}>
-                                    Teams
-                                </Link>
-                            </ListItemText>
-                        </ListItem>
-                        <ListItem onClick={() => setOpenDrawer(false)}>
-                            <ListItemText>
                                 <Link to="/login" className={classes.link}>
                                     Login
                                 </Link>

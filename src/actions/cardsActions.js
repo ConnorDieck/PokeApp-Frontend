@@ -1,4 +1,4 @@
-import { ADD_CARD, SET_CARDS } from "./actionTypes";
+import { ADD_CARD, EDIT_CARD, SET_CARDS } from "./actionTypes";
 
 /** Sets cards to state */
 
@@ -15,5 +15,15 @@ export const addCard = card => {
 	return {
 		type : ADD_CARD,
 		card
+	};
+};
+
+/** Edits a card in state */
+
+export const editCard = (oldCard, newCard) => {
+	return {
+		type    : EDIT_CARD,
+		oldCard,
+		newCard
 	};
 };
