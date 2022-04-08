@@ -161,14 +161,14 @@ class PokeappApi {
 	/** Add a card to team in db. */
 
 	static async addCardToTeam(teamId, cardId) {
-		let res = await this.request(`teams/${teamId}/${cardId}`, "post");
+		let res = await this.request(`teams/${teamId}/${cardId}`, {}, "post");
 		return res;
 	}
 
 	/** Remove a card from team in db. */
 
 	static async removeCardFromTeam(teamId, cardId) {
-		let res = await this.request(`teams/${teamId}/${cardId}`, "delete");
+		let res = await this.request(`teams/${teamId}/${cardId}`, {}, "delete");
 		return res;
 	}
 
