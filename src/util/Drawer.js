@@ -47,8 +47,15 @@ function DrawerComponent({logout}) {
                         </ListItem>
                         <ListItem onClick={() => setOpenDrawer(false)}>
                             <ListItemText>
+                                <Link to="/cards" className={classes.link}>
+                                    {user.username}'s PC
+                                </Link>
+                            </ListItemText>
+                        </ListItem>
+                        <ListItem onClick={() => setOpenDrawer(false)}>
+                            <ListItemText>
                                 <Link to="/profile" className={classes.link}>
-                                    {user.username} Profile
+                                    Profile
                                 </Link>
                             </ListItemText>
                         </ListItem>

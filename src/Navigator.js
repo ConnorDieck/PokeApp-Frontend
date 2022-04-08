@@ -15,17 +15,24 @@ import EditFavoriteForm from "./user/EditFavoriteForm";
 import NotFound from "./util/NotFound";
 import CardList from "./cards/CardList";
 import NewCardForm from "./cards/NewCardForm";
+import EditCardForm from "./cards/EditCardForm";
+import SpeciesMenu from "./species/SpeciesMenu";
+import CardView from "./cards/CardView";
+import UserProfile from "./user/UserProfile";
+import TeamsList from "./teams/TeamList";
+import TeamView from "./teams/TeamView";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./actions/authActions";
-import UserProfile from "./user/UserProfile";
+
 import { setCards } from "./actions/cardsActions";
-import CardView from "./cards/CardView";
+
 import { fetchItemsFromAPI } from "./actions/itemsActions";
 import { fetchNaturesFromAPI } from "./actions/naturesActions";
-import EditCardForm from "./cards/EditCardForm";
-import SpeciesMenu from "./species/SpeciesMenu";
+
+import { setTeams } from "./actions/teamsActions";
+import AddCardList from "./cards/AddCardList";
 
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -125,6 +132,13 @@ function Navigator() {
 						console.error("Navigator getUserInfo: Problem loading cards", err);
 						dispatch(setCards({}));
 					}
+					try {
+						let teams = await PokeappApi.getTeams();
+						dispatch(setTeams(teams));
+					} catch (err) {
+						console.error("Navigator getUserInfo: Problem loading teams", err);
+						dispatch(setTeams({}));
+					}
 				} else {
 					dispatch(setCurrentUser({}));
 				}
@@ -157,18 +171,23 @@ function Navigator() {
 					path="/species"
 					element={<SpeciesMenu />}
 				/>
-				{/* <Route //
+				<Route //
 					path="/teams"
 					element={isAuthenticated ? <TeamsList /> : <NotFound />}
-				/>
-				<Route //
-					path="/teams/new"
-					element={<TeamsForm />}
 				/>
 				<Route //
 					path="/teams/:teamId"
 					element={<TeamView />}
 				/>
+				<Route //
+					path="/teams/:teamId/add"
+					element={<AddCardList />}
+				/>
+				{/* <Route //
+					path="/teams/new"
+					element={<TeamsForm />}
+				/>
+
 				<Route //
 					path="/teams/:teamId/edit"
 					element={<TeamsForm />}

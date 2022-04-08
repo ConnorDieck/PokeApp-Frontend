@@ -52,8 +52,11 @@ function NavBar({ logout }) {
 							<Link to="/teams" className={classes.link}>
 								Teams
 							</Link>
+							<Link to="/cards" className={classes.link}>
+								{user.username}'s PC
+							</Link>
 							<Link to="/profile" className={classes.link}>
-								{user.username} Profile
+								Profile
 							</Link>
 							<Link to="/" className={classes.link} onClick={() => logout()}>
 								Logout
