@@ -6,10 +6,8 @@ import PokeappApi from "../api";
 import Team from "./Team";
 
 /**
- * Component that loads card data and passes into card component. 
- * 
- * Data for the card is loaded from the backend, while species specific info (like the official
- * artwork) is pulled and transformed from the PokeAPI. 
+ * Component that loads team data from PokeApp server and passes into the 
+ * Team component. 
  * 
  */
 

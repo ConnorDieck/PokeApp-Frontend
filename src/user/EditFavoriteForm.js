@@ -4,6 +4,10 @@ import { Grid, FormControl, Select, Button, Paper, Avatar, MenuItem } from "@mui
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { useSelector } from "react-redux";
 
+/** Form to edit user's favorite_id.
+ *  
+ */
+
 const EditFavoriteForm = ({ editFavorite }) => {
 	let INITIAL_STATE = {
 		id : ""

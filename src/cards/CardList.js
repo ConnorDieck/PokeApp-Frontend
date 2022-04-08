@@ -7,7 +7,7 @@ import { makeStyles, styled } from "@mui/styles";
 /**
  * Component for list of cards. 
  * 
- * Renders an ItemList and passes any cards loaded to Redux state down as props.
+ * Pulls cards from Redux store and populates a grid w previews/links
  * 
  */
 

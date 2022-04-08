@@ -6,6 +6,14 @@ import { useNavigate, Link } from "react-router-dom";
 import PokeappApi from "../api";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
+/** Display component for team.
+ *  
+ *  Gets team info from TeamView. 
+ *  
+ *  Loads 6 tiles and fills 6 - n with blanks where n = # of Pokemon 
+ *  on the team.
+ */
+
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor : theme.palette.mode === "dark" ? "#1A2027" : "#fff",
 	...theme.typography.body2,

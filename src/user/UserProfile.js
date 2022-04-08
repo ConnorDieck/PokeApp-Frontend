@@ -2,6 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, Button, Typography, Paper } from "@mui/material";
 
+/** User profile component.
+ * 
+ *  Links to EditFavoriteForm.
+ */
+
 const UserProfile = () => {
 	const { user } = useSelector(st => st.auth);
 

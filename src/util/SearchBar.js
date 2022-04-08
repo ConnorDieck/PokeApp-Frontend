@@ -1,6 +1,8 @@
 import { Select, TextField, MenuItem, Button, FormLabel } from "@mui/material";
 import React, { useState } from "react";
 
+/** SearchBar component to pass filters into species menu. */
+
 const SearchBar = ({ search }) => {
 	let INITIAL_STATE = {
 		name : "",

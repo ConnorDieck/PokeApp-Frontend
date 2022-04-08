@@ -36,6 +36,13 @@ import AddCardList from "./cards/AddCardList";
 import NewTeamForm from "./teams/NewTeamForm";
 import EditTeamForm from "./teams/EditTeamForm";
 
+/** Main Navigator for PokeApp.
+ * 
+ *  Loads user info and other data from backend and adds to Redux store. 
+ * 
+ *  Also sets user token to localStorage.
+ */
+
 function Navigator() {
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { user, isAuthenticated } = useSelector(st => st.auth);

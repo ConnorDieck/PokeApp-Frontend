@@ -1,5 +1,7 @@
 import React from "react";
 
+/** Generic 404 component. */
+
 const NotFound = () => {
 	return (
 		<div>

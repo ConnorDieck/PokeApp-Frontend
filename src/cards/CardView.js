@@ -10,8 +10,8 @@ import { transform } from "../helpers/transform";
 /**
  * Component that loads card data and passes into card component. 
  * 
- * Data for the card is loaded from the backend, while species specific info (like the official
- * artwork) is pulled and transformed from the PokeAPI. 
+ * Data for the card is loaded from the backend, while species specific info (like the 
+ * official artwork) is pulled and transformed from the PokeAPI. 
  * 
  */
 

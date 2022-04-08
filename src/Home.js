@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Button } from "@mui/material"
 import { Link } from "react-router-dom"
 
+/** Landing page for app. */
+
 function Home() {
     // Layout varies depending on whether a user is present or not
     const {isAuthenticated} = useSelector(st => st.auth)

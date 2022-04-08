@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from "@testing-library/react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { red, blue } from "@mui/material/colors";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const theme = createTheme({
+	palette : {
+		primary   : red,
+		secondary : blue
+	}
+});
+
+test("renders without crashing", () => {
+	render(
+		<ThemeProvider theme={theme}>
+			<App />
+		</ThemeProvider>
+	);
 });

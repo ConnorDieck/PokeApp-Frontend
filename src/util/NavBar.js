@@ -6,6 +6,12 @@ import { useSelector } from "react-redux";
 import DrawerComponent from "./Drawer";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
+/** NavBar component.
+ * 
+ *  Uses media queries to determine if screen is smaller than medium.
+ *  If yes, renders DrawerComponent instead of NavBar.
+ */
+
 const useStyles = makeStyles(theme => ({
 	navlinks : {
 		marginLeft : theme.spacing(10),

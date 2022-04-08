@@ -7,6 +7,12 @@ import { makeStyles } from "@mui/styles";
 import PokeappApi from "../api";
 import SearchBar from "../util/SearchBar";
 
+/** Component to list available Pokemon species.
+ * 
+ *  Pulls data from redux.store.species and populates with icons/links
+ *  to NewCardForm, passing along the species' id
+ */
+
 const useStyles = makeStyles(theme => ({
 	root     : {
 		display        : "flex",

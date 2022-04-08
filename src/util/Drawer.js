@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MenuIcon from '@mui/icons-material/Menu';
 
+/** Component for drawer.
+ * 
+ *  Renders on screens too small for NavBar.
+ */
+
 const useStyles = makeStyles(() =>({
     link: {
         textDecoration: "none",

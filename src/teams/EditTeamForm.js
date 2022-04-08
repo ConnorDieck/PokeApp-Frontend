@@ -5,11 +5,12 @@ import PokeappApi from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { editTeam, setTeams, addTeam } from "../actions/teamsActions";
 
-/** Form to create a card.
+/** Form to edit a team.
  * 
- * Species data will be added to the url when user selects a Pokemon to build.
- * This will also be used to call the external API to supply the form's select options 
- * (e.g.  moves, and abilities). This will also be used to display artwork.
+ *  Team data is pulled from store based on id in URL. 
+ *  
+ *  Upon submission, sends team to server and dispatches editTeam() to 
+ *  update redux store.
  * 
  */
 
