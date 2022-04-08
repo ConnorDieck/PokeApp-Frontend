@@ -72,7 +72,7 @@ function Team({ team }) {
 								<Grid item xs={4}>
 									<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
 										<Link to={`/cards/${m.id}`}>
-											<img src={species[m.speciesId].sprite} />
+											<img src={species[m.speciesId].sprite} alt="Pokemon sprite" />
 										</Link>
 										<p>{m.name}</p>
 										<Button onClick={() => remove(m.id)}>Remove</Button>
@@ -97,7 +97,7 @@ function Team({ team }) {
 								<Grid item xs={4}>
 									<Item key={m.id} style={{ backgroundColor: "#ffffeb" }}>
 										<Link to={`/cards/${m.id}`}>
-											<img src={species[m.speciesId].sprite} />
+											<img src={species[m.speciesId].sprite} alt="Pokemon sprite" />
 										</Link>
 										<p>{m.name}</p>
 									</Item>

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Grid, FormControl, TextField, Button, Paper, FormLabel } from "@mui/material";
 import PokeappApi from "../api";
 import { useDispatch, useSelector } from "react-redux";
-import { editTeam, setTeams, addTeam } from "../actions/teamsActions";
+import { editTeam } from "../actions/teamsActions";
 
 /** Form to edit a team.
  * 

@@ -1,11 +1,12 @@
 import { Container, Grid, Typography, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import PokeappApi from "../api";
 import Card from "./Card";
 import axios from "axios";
 import { transform } from "../helpers/transform";
+import { deleteCardFromStore } from "../actions/cardsActions";
 
 /**
  * Component that loads card data and passes into card component. 
@@ -22,10 +23,12 @@ function CardView() {
 	const { cardId } = useParams();
 	const { user, isAuthenticated } = useSelector(st => st.auth);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	async function deleteCard() {
+	async function deleteCard(card) {
 		await PokeappApi.deleteCard(cardId);
-		navigate("/");
+		dispatch(deleteCardFromStore(card));
+		navigate("/cards");
 	}
 
 	useEffect(
@@ -64,7 +67,12 @@ function CardView() {
 						<Button component={Link} to="edit" variant="contained" color="secondary">
 							EDIT
 						</Button>
-						<Button onClick={deleteCard} variant="contained" color="primary" style={{ margin: "1" }}>
+						<Button
+							onClick={() => deleteCard(cardData)}
+							variant="contained"
+							color="primary"
+							style={{ margin: "1" }}
+						>
 							DELETE
 						</Button>
 					</div>

@@ -8,3 +8,5 @@ export const SET_TEAMS = "SET_TEAMS";
 export const ADD_TEAM = "ADD_TEAM";
 export const EDIT_CARD = "EDIT_CARD";
 export const EDIT_TEAM = "EDIT_TEAM";
+export const DELETE_CARD = "DELETE_CARD";
+export const DELETE_TEAM = "DELETE_TEAM";

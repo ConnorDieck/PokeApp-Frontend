@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Grid, Button, Box, Paper } from "@mui/material";
-import { makeStyles, styled } from "@mui/styles";
+import { styled } from "@mui/styles";
 import PokeappApi from "../api";
 import { compareObjInArrs } from "../helpers/compareObjInArrs";
 
@@ -96,7 +96,7 @@ function AddCardList() {
 				{candidates.map(c => (
 					<Grid item xs={4} key={c.id}>
 						<Item style={{ backgroundColor: "#ffffeb" }}>
-							<img src={species[c.speciesId].sprite} />
+							<img src={species[c.speciesId].sprite} alt="Pokemon sprite" />
 							<p>{c.name}</p>
 							<Button onClick={() => addToTeam(c.id)} variant="contained" color="secondary">
 								ADD

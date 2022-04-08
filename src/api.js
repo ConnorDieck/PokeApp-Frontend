@@ -117,7 +117,7 @@ class PokeappApi {
 	/** Delete a card in db. */
 
 	static async deleteCard(id) {
-		let res = await this.request(`cards/${id}`, "delete");
+		let res = await this.request(`cards/${id}`, {}, "delete");
 		return res;
 	}
 
@@ -154,7 +154,7 @@ class PokeappApi {
 	/** Delete a team in db. */
 
 	static async deleteTeam(id) {
-		let res = await this.request(`teams/${id}`, "delete");
+		let res = await this.request(`teams/${id}`, {}, "delete");
 		return res;
 	}
 

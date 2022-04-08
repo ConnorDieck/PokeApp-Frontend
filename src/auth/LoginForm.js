@@ -5,8 +5,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const LoginForm = ({ login }) => {
 	let INITIAL_STATE = {
-		username : "cooperdoon",
-		password : "letmein"
+		username : "",
+		password : ""
 	};
 
 	const [ fData, setFormData ] = useState(INITIAL_STATE);

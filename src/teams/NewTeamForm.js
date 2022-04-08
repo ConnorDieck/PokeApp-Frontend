@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Grid, FormControl, TextField, Button, Paper, FormLabel } from "@mui/material";
 import PokeappApi from "../api";
-import { useDispatch, useSelector } from "react-redux";
-import { editTeam, setTeams, addTeam } from "../actions/teamsActions";
+import { useDispatch } from "react-redux";
+import { addTeam } from "../actions/teamsActions";
 
 /** Form to create a team.
  * 

@@ -1,4 +1,4 @@
-import { ADD_CARD, EDIT_CARD, SET_CARDS } from "./actionTypes";
+import { ADD_CARD, DELETE_CARD, EDIT_CARD, SET_CARDS } from "./actionTypes";
 
 /** Sets cards to state */
 
@@ -25,5 +25,14 @@ export const editCard = (oldCard, newCard) => {
 		type    : EDIT_CARD,
 		oldCard,
 		newCard
+	};
+};
+
+/** Deletes a card from state */
+
+export const deleteCardFromStore = card => {
+	return {
+		type : DELETE_CARD,
+		card
 	};
 };

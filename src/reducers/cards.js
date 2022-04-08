@@ -1,4 +1,4 @@
-import { ADD_CARD, EDIT_CARD, SET_CARDS } from "../actions/actionTypes";
+import { ADD_CARD, DELETE_CARD, EDIT_CARD, SET_CARDS } from "../actions/actionTypes";
 
 const cards = (state = {}, action) => {
 	let cards = {};
@@ -19,6 +19,14 @@ const cards = (state = {}, action) => {
 			cards[action.newCard.name] = { ...action.newCard, id: action.oldCard.id };
 
 			delete cards[action.oldCard.name];
+
+			return {
+				...cards
+			};
+		case DELETE_CARD:
+			cards = { ...state };
+
+			delete cards[action.card.name];
 
 			return {
 				...cards

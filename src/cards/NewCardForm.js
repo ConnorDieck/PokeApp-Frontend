@@ -65,6 +65,13 @@ const NewCardForm = () => {
 
 	const { speciesId, teamId } = useParams();
 
+	/** Check the URL to see if we're adding to a team. 
+	 *  If yes, we pass a different URL so that we'll redirect
+	 *  back to that team upon creating.
+	 */
+
+	let link = teamId ? `/teams/${teamId}` : `/cards`;
+
 	useEffect(
 		function loadSpecies() {
 			console.debug("NewCardForm useEffect loadSpecies");
@@ -150,10 +157,15 @@ const NewCardForm = () => {
 		if (isAuthenticated) {
 			let res = await PokeappApi.addCard(formattedData);
 			if (teamId) await PokeappApi.addCardToTeam(teamId, res.id);
+			dispatch(addCard(res));
+			setFormData(INITIAL_STATE);
+			navigate(link);
+		} else {
+			alert("Thanks for trying out PokeApp! Create an account for the full experience.");
+			dispatch(addCard(formattedData));
+			setFormData(INITIAL_STATE);
+			navigate("/");
 		}
-		dispatch(addCard(formattedData));
-		setFormData(INITIAL_STATE);
-		navigate("/cards");
 	};
 
 	if (isLoading) return <p>loading...</p>;

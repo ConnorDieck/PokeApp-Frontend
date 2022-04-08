@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Grid, Button, Box, Paper } from "@mui/material";
-import { makeStyles, styled } from "@mui/styles";
+import { styled } from "@mui/styles";
 
 /**
  * Component for list of cards. 
@@ -33,7 +33,7 @@ function CardList() {
 					<Grid item xs={4} key={m.id}>
 						<Item style={{ backgroundColor: "#ffffeb" }}>
 							<Link to={m.localurl}>
-								<img src={species[m.speciesId].sprite} />
+								<img src={species[m.speciesId].sprite} alt="Pokemon sprite" />
 							</Link>
 							<p>{m.name}</p>
 						</Item>

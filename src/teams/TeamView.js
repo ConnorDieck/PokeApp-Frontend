@@ -1,7 +1,8 @@
 import { Container, Grid, Typography, Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { deleteTeamFromStore } from "../actions/teamsActions";
 import PokeappApi from "../api";
 import Team from "./Team";
 
@@ -15,12 +16,14 @@ function TeamView() {
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ teamData, setTeamData ] = useState({});
 	const { teamId } = useParams();
-	const { user, isAuthenticated } = useSelector(st => st.auth);
+	const { isAuthenticated } = useSelector(st => st.auth);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	async function deleteTeam() {
+	async function deleteTeam(team) {
 		await PokeappApi.deleteTeam(teamId);
-		navigate("/");
+		dispatch(deleteTeamFromStore(team));
+		navigate("/teams");
 	}
 
 	useEffect(
@@ -65,7 +68,7 @@ function TeamView() {
 							</Grid>
 							<Grid item>
 								<Button
-									onClick={deleteTeam}
+									onClick={() => deleteTeam(teamData)}
 									variant="contained"
 									color="primary"
 									style={{ margin: "1" }}

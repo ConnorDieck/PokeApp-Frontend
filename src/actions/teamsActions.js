@@ -1,4 +1,4 @@
-import { ADD_TEAM, EDIT_TEAM, SET_TEAMS } from "./actionTypes";
+import { ADD_TEAM, DELETE_TEAM, EDIT_TEAM, SET_TEAMS } from "./actionTypes";
 
 /** Sets teams to state */
 
@@ -25,5 +25,14 @@ export const editTeam = (oldTeam, newTeam) => {
 		type    : EDIT_TEAM,
 		oldTeam,
 		newTeam
+	};
+};
+
+/** Deletes a team from state */
+
+export const deleteTeamFromStore = team => {
+	return {
+		type : DELETE_TEAM,
+		team
 	};
 };
