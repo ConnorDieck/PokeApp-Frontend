@@ -19,7 +19,7 @@ function ItemList({items, title, newLink}) {
       <Button component={Link} to={newLink} color="secondary">NEW</Button>
       {items.length !== 0
         ? (
-          <ul style={{ fontSize: "120%" }}>
+          <ul style={{ fontSize: "120%", listStyleType: "none" }}>
             {items.map(item =>
               <li key={item.id}>
                 <Link to={item.localurl}>

@@ -64,17 +64,34 @@ function CardView() {
 			<Grid align="center">
 				{isAuthenticated ? (
 					<div>
-						<Button component={Link} to="edit" variant="contained" color="secondary">
-							EDIT
-						</Button>
-						<Button
-							onClick={() => deleteCard(cardData)}
-							variant="contained"
-							color="primary"
-							style={{ margin: "1" }}
-						>
-							DELETE
-						</Button>
+						{/* V2.0 Stretch goal: create AddTeamList, accessible via 
+						    /cards/:cardId/teams where users can add to teams from 
+							the card
+						
+						<div>
+							<Button
+								component={Link}
+								to="teams"
+								variant="contained"
+								style={{ backgroundColor: "green" }}
+							>
+								ADD TO TEAM
+							</Button>
+						</div>
+						<br /> */}
+						<div>
+							<Button component={Link} to="edit" variant="contained" color="secondary">
+								EDIT
+							</Button>
+							<Button
+								onClick={() => deleteCard(cardData)}
+								variant="contained"
+								color="primary"
+								style={{ margin: "1" }}
+							>
+								DELETE
+							</Button>
+						</div>
 					</div>
 				) : (
 					<Typography>Owner: {user.username}</Typography>

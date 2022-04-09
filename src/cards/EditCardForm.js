@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editCard } from "../actions/cardsActions";
 import { transform } from "../helpers/transform";
 import axios from "axios";
+import isEmpty from "lodash";
 
 /** Form to create a card.
  * 
@@ -126,39 +127,46 @@ const EditCardForm = () => {
 	const handleSubmit = async evt => {
 		evt.preventDefault();
 		try {
-			await PokeappApi.addAbility(fData.ability);
+			!isEmpty(fData.ability)
+				? await PokeappApi.addAbility(fData.ability)
+				: await PokeappApi.addAbility(apiData.abilities[0]);
 		} catch (err) {
-			console.error("error adding ability", fData.ability);
+			console.error("error adding ability", err);
 		}
 		try {
-			await PokeappApi.addMove(fData.move1);
+			!isEmpty(fData.move1) ? await PokeappApi.addMove(fData.move1) : await PokeappApi.addMove(apiData.moves[0]);
 		} catch (err) {
-			console.error("error adding move", fData.move1);
+			console.error("error adding move", err);
 		}
 		try {
-			await PokeappApi.addMove(fData.move2);
+			!isEmpty(fData.move2) ? await PokeappApi.addMove(fData.move2) : await PokeappApi.addMove(apiData.moves[1]);
 		} catch (err) {
-			console.error("error adding move", fData.move2);
+			console.error("error adding move", err);
 		}
 		try {
-			await PokeappApi.addMove(fData.move3);
+			!isEmpty(fData.move3) ? await PokeappApi.addMove(fData.move3) : await PokeappApi.addMove(apiData.moves[2]);
 		} catch (err) {
-			console.error("error adding move", fData.move3);
+			console.error("error adding move", err);
 		}
 		try {
-			await PokeappApi.addMove(fData.move4);
+			!isEmpty(fData.move4) ? await PokeappApi.addMove(fData.move4) : await PokeappApi.addMove(apiData.moves[3]);
 		} catch (err) {
-			console.error("error adding move", fData.move4);
+			console.error("error adding move", err);
 		}
 		let formattedData = {
 			name      : fData.name,
-			ability   : fData.ability.name,
-			url       : cardData.url,
-			gender    : fData.gender,
-			item      : fData.item,
-			nature    : fData.nature,
+			ability   : fData.ability.name ? fData.ability.name : cardData.ability,
+			url       : species[cardData.speciesId].url,
+			gender    : fData.gender ? fData.gender : true,
+			item      : fData.item ? fData.item : cardData.item,
+			nature    : fData.nature ? fData.nature : cardData.nature,
 			speciesId : cardData.speciesId,
-			moves     : [ fData.move1.name, fData.move2.name, fData.move3.name, fData.move4.name ]
+			moves     : [
+				fData.move1.name ? fData.move1.name : apiData.moves[0].name,
+				fData.move2.name ? fData.move2.name : apiData.moves[1].name,
+				fData.move3.name ? fData.move3.name : apiData.moves[2].name,
+				fData.move4.name ? fData.move4.name : apiData.moves[3].name
+			]
 		};
 
 		await PokeappApi.editCard(formattedData, cardId);
