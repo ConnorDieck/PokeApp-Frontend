@@ -21,11 +21,15 @@ const LoginForm = ({ login }) => {
 	};
 
 	// when submitted, runs login function the current user and token to state
-	const handleSubmit = evt => {
+	const handleSubmit = async evt => {
 		evt.preventDefault();
-		login(fData);
+		let res = await login(fData);
 		setFormData(INITIAL_STATE);
-		navigate("/");
+		if (res.success) {
+			navigate("/");
+		} else {
+			alert(res.err);
+		}
 	};
 
 	const paperStyle = {

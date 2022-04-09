@@ -62,6 +62,7 @@ function Navigator() {
 			return { success: true };
 		} catch (err) {
 			console.error("login failed", err);
+
 			return { success: false, err };
 		}
 	}
@@ -75,6 +76,7 @@ function Navigator() {
 			return { success: true };
 		} catch (err) {
 			console.error("signup failed", err);
+
 			return { success: false, err };
 		}
 	}
@@ -139,14 +141,12 @@ function Navigator() {
 						dispatch(setCards(cards));
 					} catch (err) {
 						console.error("Navigator getUserInfo: Problem loading cards", err);
-						dispatch(setCards({}));
 					}
 					try {
 						let teams = await PokeappApi.getTeams();
 						dispatch(setTeams(teams));
 					} catch (err) {
 						console.error("Navigator getUserInfo: Problem loading teams", err);
-						dispatch(setTeams({}));
 					}
 				} else {
 					dispatch(setCurrentUser({}));
@@ -228,11 +228,11 @@ function Navigator() {
 				/>
 				<Route //
 					path="/login"
-					element={<LoginForm login={login} />}
+					element={!isAuthenticated ? <LoginForm login={login} /> : <NotFound />}
 				/>
 				<Route //
 					path="/signup"
-					element={<SignupForm register={register} />}
+					element={!isAuthenticated ? <SignupForm register={register} /> : <NotFound />}
 				/>
 				<Route //
 					path="/favorite"

@@ -162,7 +162,6 @@ const NewCardForm = () => {
 			navigate(link);
 		} else {
 			alert("Thanks for trying out PokeApp! Create an account for the full experience.");
-			dispatch(addCard(formattedData));
 			setFormData(INITIAL_STATE);
 			navigate("/");
 		}

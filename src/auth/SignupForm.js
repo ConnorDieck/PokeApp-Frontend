@@ -21,11 +21,16 @@ const SignupForm = ({ register }) => {
 	};
 
 	// when submitted, runs register function the current user and token to state
-	const handleSubmit = evt => {
+	const handleSubmit = async evt => {
 		evt.preventDefault();
-		register(fData);
+		let res = await register(fData);
+		console.log(res);
 		setFormData(INITIAL_STATE);
-		navigate("/favorite");
+		if (res.success) {
+			navigate("/favorite");
+		} else {
+			alert(res.error);
+		}
 	};
 
 	const paperStyle = {

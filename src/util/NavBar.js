@@ -18,8 +18,10 @@ const useStyles = makeStyles(theme => ({
 		display    : "flex"
 	},
 	logo     : {
-		flexGrow : "1",
-		cursor   : "pointer"
+		flexGrow       : "1",
+		cursor         : "pointer",
+		textDecoration : "none",
+		color          : "white"
 	},
 	link     : {
 		textDecoration : "none",
@@ -45,9 +47,10 @@ function NavBar({ logout }) {
 			<AppBar position="static">
 				<CssBaseline />
 				<Toolbar>
-					<Typography variant="h4" className={classes.logo}>
+					<Typography variant="h4" component={Link} to="/" className={classes.logo}>
 						P<CatchingPokemonIcon />keApp
 					</Typography>
+
 					{isMobile ? (
 						<DrawerComponent logout={logout} />
 					) : (
@@ -77,8 +80,8 @@ function NavBar({ logout }) {
 			<AppBar position="static">
 				<CssBaseline />
 				<Toolbar>
-					<Typography variant="h4" className={classes.logo}>
-						PokeApp
+					<Typography variant="h4" component={Link} to="/" className={classes.logo}>
+						P<CatchingPokemonIcon />keApp
 					</Typography>
 					{isMobile ? (
 						<DrawerComponent logout={logout} />
