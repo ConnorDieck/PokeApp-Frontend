@@ -121,29 +121,37 @@ const NewCardForm = () => {
 		evt.preventDefault();
 
 		try {
-			!isEmpty(fData.ability)
+			Object.values(fData.ability).length > 0
 				? await PokeappApi.addAbility(fData.ability)
 				: await PokeappApi.addAbility(apiData.abilities[0]);
 		} catch (err) {
 			console.error("error adding ability", err);
 		}
 		try {
-			!isEmpty(fData.move1) ? await PokeappApi.addMove(fData.move1) : await PokeappApi.addMove(apiData.moves[0]);
+			Object.values(fData.move1).length > 0
+				? await PokeappApi.addMove(fData.move1)
+				: await PokeappApi.addMove(apiData.moves[0]);
 		} catch (err) {
 			console.error("error adding move", err);
 		}
 		try {
-			!isEmpty(fData.move2) ? await PokeappApi.addMove(fData.move2) : await PokeappApi.addMove(apiData.moves[1]);
+			Object.values(fData.move2).length > 0
+				? await PokeappApi.addMove(fData.move2)
+				: await PokeappApi.addMove(apiData.moves[1]);
 		} catch (err) {
 			console.error("error adding move", err);
 		}
 		try {
-			!isEmpty(fData.move3) ? await PokeappApi.addMove(fData.move3) : await PokeappApi.addMove(apiData.moves[2]);
+			Object.values(fData.move3).length > 0
+				? await PokeappApi.addMove(fData.move3)
+				: await PokeappApi.addMove(apiData.moves[2]);
 		} catch (err) {
 			console.error("error adding move", err);
 		}
 		try {
-			!isEmpty(fData.move4) ? await PokeappApi.addMove(fData.move4) : await PokeappApi.addMove(apiData.moves[3]);
+			Object.values(fData.move4).length > 0
+				? await PokeappApi.addMove(fData.move4)
+				: await PokeappApi.addMove(apiData.moves[3]);
 		} catch (err) {
 			console.error("error adding move", err);
 		}
