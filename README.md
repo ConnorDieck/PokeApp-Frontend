@@ -1,4 +1,4 @@
-# PokeApp-Backend
+# PokeApp-Frontend
 
 Live site link: http://pokeapp-cd.surge.sh/
 
