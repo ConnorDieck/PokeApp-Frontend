@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# PokeApp-Backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live site link: http://pokeapp-cd.surge.sh/
 
-## Available Scripts
+### Description
 
-In the project directory, you can run:
+This app that allows users to compile teams of six Pokemon. The user can create individual Pokemon, selecting their moves, abilities, natures and the items that they hold, as well as giving them a nickname. Once Pokemon have been created, they can be added to/removed from any existing team a user has created. Users may also select a "favorite" Pokemon which is then displayed on their profile. 
 
-### `npm start`
+The features described above were included in order to give users an accessible means to model precise details about Pokemon teams and share them with friends.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Tests
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Frontend tests include limited smoke and snapshot testing for components not connected to the Redux store. They are located in the same folders as the components they are testing.
 
-### `npm test`
+In order to run tests, enter `npm test` into the terminal. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Flow
 
-### `npm run build`
+Users may demo the Pokemon creation feature upon entering the site without the need to create an account. If users wish to access full site functionality, they may sign up to create an account. Doing so will redirect them to select their favorite Pokemon. Once finished, the user will land on the home page.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+From the home page, a registered user may select `CREATE NEW TEAM` to create and name a new empty team, or `LOAD TEAMS` to view existing teams. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![homepage](./homepage.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+On the teams page, users can edit the team name,  add / remove Pokemon by clicking the options displayed on the cards, or delete the team entirely. 
 
-### `npm run eject`
+![teampage](./teampage.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Choosing to add a Pokemon will bring the user to their existing Pokemon not yet on the team. Pokemon can be added straight from this location, or the user can choose to create a new Pokemon. Doing so will redirect to the species menu, where they can select a Pokemon to begin building. Once selected, the user can choose the moves, abilities, etc. that they wish to add. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Existing Pokemon:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![pcpage](./pcpage.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Species Menu:
 
-## Learn More
+![speciespage](./speciespage.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+New Pokemon Form:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![createpokemonpage](./createpokemonpage.png)
 
-### Code Splitting
+### APIs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This app uses the Pokemon API as well as a custom PokeApp api.
 
-### Analyzing the Bundle Size
+- Pokemon API: https://pokeapi.co/docs/v2
+- PokeApp API: https://pokeapp-cd.herokuapp.com/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The PokeApp API was created in order to quickly load information about species, items, and natures, as well as to save and authenticate users and their created cards / teams. It follows RESTful protocols with CRUD endpoints for authorization, users, teams, cards, abilities, items, and natures.
 
-### Making a Progressive Web App
+![database structure](QuickDBD-PokéApp_DB_Structure.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Technology Stack
 
-### Advanced Configuration
+The backend uses Express.js within a Node environment to create the endpoints for the PokeApp API. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The frontend uses React/Redux for component usage and state management. 
