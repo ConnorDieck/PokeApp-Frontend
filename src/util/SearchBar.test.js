@@ -1,13 +1,13 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import LoginForm from "./LoginForm";
+import SearchBar from "./SearchBar";
 import { MemoryRouter } from "react-router-dom";
 
 //smoke test
 it("renders without crashing", function() {
 	render(
 		<MemoryRouter>
-			<LoginForm />
+			<SearchBar />
 		</MemoryRouter>
 	);
 });
@@ -16,7 +16,7 @@ it("renders without crashing", function() {
 test("matches snapshot", function() {
 	const { asFragment } = render(
 		<MemoryRouter>
-			<LoginForm />
+			<SearchBar />
 		</MemoryRouter>
 	);
 	expect(asFragment()).toMatchSnapshot();

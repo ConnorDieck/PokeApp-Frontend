@@ -64,7 +64,11 @@ const SearchBar = ({ search }) => {
 				onChange={handleChange}
 				placeholder=""
 			>
-				{types.map(t => <MenuItem value={t}>{t}</MenuItem>)}
+				{types.map((t, index) => (
+					<MenuItem value={t} key={index}>
+						{t}
+					</MenuItem>
+				))}
 			</Select>
 			<Button color="secondary" variant="contained" type="submit">
 				Search

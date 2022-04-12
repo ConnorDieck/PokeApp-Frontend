@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div>
+      <header
+        class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-1bw2q7l-MuiPaper-root-MuiAppBar-root"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-1t29gy6-MuiToolbar-root"
+        >
+          <a
+            class="MuiTypography-root MuiTypography-h4 makeStyles-logo-5 css-5lbw0b-MuiTypography-root"
+            href="/"
+          >
+            P
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="CatchingPokemonIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.5 12c0 1.38-1.12 2.5-2.5 2.5S9.5 13.38 9.5 12s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5zm7.5 0c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10zm-2 0h-4c0-2.21-1.79-4-4-4s-4 1.79-4 4H4c0 4.41 3.59 8 8 8s8-3.59 8-8z"
+              />
+            </svg>
+            keApp
+          </a>
+          <div
+            class="makeStyles-navlinks-4"
+          >
+            <a
+              class="makeStyles-link-6"
+              href="/"
+            >
+              Home
+            </a>
+            <a
+              class="makeStyles-link-6"
+              href="/login"
+            >
+              Login
+            </a>
+            <a
+              class="makeStyles-link-6"
+              href="/signup"
+            >
+              Sign Up
+            </a>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div
+      class="homepage"
+    >
+      <h2
+        class="title"
+      >
+        POKEAPP
+      </h2>
+      <div
+        class="options"
+      >
+        <a
+          class="MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1uytqtz-MuiButtonBase-root-MuiButton-root"
+          href="/login"
+          tabindex="0"
+        >
+          SIGN IN
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </a>
+        <p>
+          OR
+        </p>
+        <a
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root  css-1uigadd-MuiButtonBase-root-MuiButton-root"
+          href="/species"
+          tabindex="0"
+        >
+          DEMO
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
