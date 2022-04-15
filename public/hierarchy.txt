@@ -1,0 +1,39 @@
+App
+    Navigator
+
+        NavBar
+            Drawer
+
+        Home (if logged in: links to TeamList and SpeciesMenu; if not: links to LoginForm and NewCardForm)
+
+        LoginForm
+
+        SignupForm (redirects to EditFavoriteForm upon submit)
+
+        SpeciesMenu
+            SearchBar
+            SpeciesItem (Links to NewCardForm)
+
+        EditFavoriteForm
+
+        TeamList
+            ItemList
+
+        TeamView
+            Team
+
+        NewTeamForm
+
+        EditTeamForm
+
+        AddCardList
+        
+        CardList
+
+        CardView
+            Card
+
+        NewCardForm
+        
+        EditCardForm
+
