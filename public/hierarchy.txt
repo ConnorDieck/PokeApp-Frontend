@@ -10,30 +10,30 @@ App
 
         SignupForm (redirects to EditFavoriteForm upon submit)
 
-        SpeciesMenu
-            SearchBar
+        SpeciesMenu - calls all species from redux store and renders a SpeciesItem for each
+            SearchBar - form that allows inputs for "name" and "type" to be passed as filters to species.getAll()
             SpeciesItem (Links to NewCardForm)
 
-        EditFavoriteForm
+        EditFavoriteForm - loads species names from Redux store and sends PATCH request to update user's favoriteId
 
-        TeamList
-            ItemList
+        TeamList - loads user's teams from redux store and passes info to ItemList
+            ItemList - template for displaying teams
 
-        TeamView
-            Team
+        TeamView - loads selected team from server and uses data to populate Team component
+            Team - template for displaying team data
 
-        NewTeamForm
+        NewTeamForm - manages form state, allowing user to choose new name
 
-        EditTeamForm
+        EditTeamForm - same as NewTeamForm but sends a PATCH request to update existing card in API
 
-        AddCardList
+        AddCardList - same as CardList, but includes option to add given card to the team whose id is currently in URL
         
-        CardList
+        CardList - pulls user's created Cards from the server and displays them with links to CardView for each
 
-        CardView
-            Card
+        CardView - calls card data from server and passes it to Card
+            Card - template for displaying card data
 
-        NewCardForm
+        NewCardForm - calls external API for moves and abilities, and pulls species infor, items and natures from Redux store
         
-        EditCardForm
+        EditCardForm - same as NewCardForm but sends a PATCH request to update existing card in API
 
