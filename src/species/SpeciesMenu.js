@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SpeciesItem from "./SpeciesItem";
 import { useSelector } from "react-redux";
@@ -37,7 +37,24 @@ const SpeciesMenu = () => {
 	const classes = useStyles();
 	const species = useSelector(st => st.species);
 	const [ listSpecies, setListSpecies ] = useState(species);
+	// const [ isLoading, setIsLoading ] = useState(true);
 	const { teamId } = useParams();
+
+	// useEffect(
+	// 	function loadSpecies() {
+	// 		console.debug("SpeciesMenu useEffect loadSpecies");
+
+	// 		async function loadAllSpecies() {
+	// 			setListSpecies(species);
+	// 			setIsLoading(false);
+	// 		}
+
+	// 		setIsLoading(true);
+	// 		loadAllSpecies();
+			
+	// 	},
+	// 	[listSpecies]
+	// )
 
 	/** Check the URL to see if we're adding to a team. 
 	 *  If yes, we pass a different URL so that we can create a card and 
@@ -50,10 +67,13 @@ const SpeciesMenu = () => {
 		setListSpecies(species);
 	}
 
+	// if (isLoading) return 'Loading species...'
+
 	return (
 		<div className={classes.root}>
-			<SearchBar search={search} />
+			
 			<Grid align="center" className={classes.gridList}>
+			<SearchBar search={search} />
 				{Object.values(listSpecies).map(s => (
 					<Link className={classes.link} to={`${link}/${s.id}`}>
 						<SpeciesItem item={s} />

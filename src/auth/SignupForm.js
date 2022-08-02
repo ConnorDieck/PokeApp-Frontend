@@ -29,7 +29,7 @@ const SignupForm = ({ register }) => {
 		if (res.success) {
 			navigate("/favorite");
 		} else {
-			alert(res.error);
+			alert(res.err);
 		}
 	};
 
