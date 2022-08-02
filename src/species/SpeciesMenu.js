@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
+
+// TODO: This component will currently not load species when refreshed without a user. The problem can be resolved by restarting demo process or hitting the search button again, but this is not an ideal experience and should be updated.
+
 const SpeciesMenu = () => {
 	const classes = useStyles();
 	const species = useSelector(st => st.species);
