@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { editCard } from "../actions/cardsActions";
 import { transform } from "../helpers/transform";
 import axios from "axios";
-import isEmpty from "lodash";
 
 /** Form to create a card.
  * 
