@@ -186,7 +186,7 @@ function Navigator() {
 				/>
 				<Route //
 					path="/teams/:teamId"
-					element={<TeamView />}
+					element={isAuthenticated ? <TeamView /> : <NotFound />}
 				/>
 				<Route //
 					path="/teams/:teamId/add"
@@ -208,7 +208,7 @@ function Navigator() {
 
 				<Route //
 					path="/teams/:teamId/edit"
-					element={<EditTeamForm />}
+					element={isAuthenticated ? <EditTeamForm /> : <NotFound />}
 				/>
 				<Route //
 					path="/cards"
