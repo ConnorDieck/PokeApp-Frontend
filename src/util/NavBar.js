@@ -39,7 +39,7 @@ function NavBar({ logout }) {
 	const { isAuthenticated, user } = useSelector(st => st.auth);
 	const classes = useStyles();
 	const theme = useTheme();
-	const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+	const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 	let Navs = {};
 
 	if (isAuthenticated) {
