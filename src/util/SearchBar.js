@@ -1,5 +1,15 @@
 import { Select, TextField, MenuItem, Button, FormLabel } from "@mui/material";
 import React, { useState } from "react";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles(theme => ({
+	searchBar     : {
+		margin: '5px',
+		display: 'flex',
+		justifyContent: 'space-around',
+		alignItems: 'center'
+	}
+}));
 
 /** SearchBar component to pass filters into species menu. */
 
@@ -8,8 +18,8 @@ const SearchBar = ({ search }) => {
 		name : "",
 		type : null
 	};
-
 	const [ fData, setFormData ] = useState(INITIAL_STATE);
+	const classes = useStyles();
 
 	const types = [
 		"Normal",
@@ -48,7 +58,7 @@ const SearchBar = ({ search }) => {
 	};
 
 	return (
-		<form className="searchBar" onSubmit={handleSubmit}>
+		<form className={classes.searchBar} onSubmit={handleSubmit}>
 			<TextField //
 				id="name"
 				name="name"
